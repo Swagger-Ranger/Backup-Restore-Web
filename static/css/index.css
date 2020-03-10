@@ -1,0 +1,68 @@
+body {
+        margin: 0;
+        font-family: 'Microsoft YaHei';
+        line-height: normal;
+        /*background: #fff url(../img/bg_body.jpg) repeat;*/
+    }
+
+    #content {
+        padding-left: 220px;
+        /*transition: 0.3s;*/
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    #nth-tabs {
+        width:100%;
+        height: calc(100% - 50px);
+    }
+
+    #user-bar{
+        width:100%;
+        height:50px;
+        line-height:50px;
+/*        border-bottom:1px solid lightgray;*/
+    }
+    
+    #system-name {
+        float:left;
+        margin-left:50px;
+        font-size: 20px;
+        font-weight: bold;
+        color:#313452;
+        /*cursor: pointer;*/
+    }
+    #user-name {
+        float:right;
+    }
+
+    #user-info {
+/*        display: none;*/
+        float:right;
+        margin-right:20px;
+        cursor: pointer;
+    }
+
+    .c-p{cursor: pointer;}
+
+    #user-info .user-name {
+        color: dimgray;
+        padding-left: 6px;
+    }
+
+    #user-info .dropdown-menu {
+        min-width: 0;
+        left: -90px;
+    }
+
+    #user-info .dropdown-menu a {
+        color: dimgray;
+    }
+
+    .form-horizontal .form-group{
+        margin-left:0px;
+        margin-right:0px;
+    }
+
+    body .demo-class .layui-layer-title{background:#E94F25;color:#fff; }

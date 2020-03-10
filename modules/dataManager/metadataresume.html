@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>备份归档</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- import CSS -->
+		<!--<link rel="stylesheet" href="../../plugins/element-UI/index.css">-->
+		<link rel="stylesheet" href="../../plugins/element-UI/lib/theme-chalk/index.css">
+		<script src="../../static/js/jquery.min.js"></script>
+		<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+		<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+		<script src="../../static/js/common.js"></script>
+		<script src="../../static/js/commonUtil.js"></script>
+		<style>
+			html{ height: 100%;}
+			body{ background: #F8F8F8; height: 100%;}
+			.el-row{ height: 100%;}
+			.h_100{ height: 100%;}
+			.w_100{ width: 100%;}
+			.l_h2{ line-height: 2;}
+			.f_l{ float: left;}
+			.f_r{ float: right;}
+			.m_l_20{ margin-left: 20px;}
+			.m_r_20{ margin-right: 20px;}
+			.m_t_10 { margin-top: 10px;}
+			.m_t_15 { margin-top: 15px;}
+			.m_t_20 { margin-top: 20px;}
+			.m_b_10 { margin-bottom: 10px;}
+			.min-h{ min-height: calc(100% - 51px);}
+			.min-h-28{ min-height: 13.4rem;}
+			#rrapp{ margin: 10px 15px; height: calc(100% - 20px);}
+			.grid-content{
+				border-radius: 5px;
+				padding: 15px;
+			}
+			.bg-white{
+				background: #fff;
+			}
+			.abow_dialog {
+				display: flex;
+				justify-content: center;
+				align-items: Center;
+				overflow: hidden;
+			}
+			
+			#menuDialog .el-dialog {
+				height: 300px;
+			}
+			
+			.el-dialog {
+				margin: 0 auto !important;
+				height: 86%;
+				overflow: hidden;
+			}
+			
+			.el-dialog__body {
+				max-height: calc(100% - 144px);
+				position: absolute;
+				left: 0;
+				top: 54px;
+				bottom: 0;
+				right: 0;
+				padding: 0;
+				z-index: 1;
+				overflow: hidden;
+				overflow-y: auto;
+				margin-bottom: 70px;
+			}
+			
+			.el-dialog__footer {
+				position: absolute;
+				bottom: 0;
+				z-index: 10;
+				width: 100%;
+				background: #fff;
+			}
+			.del{
+				color: #F56C6C;
+			}
+			.el-input.is-disabled .el-input__inner {
+				color: #333;
+			}
+			.el-select {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="rrapp" v-cloak>
+			<el-row sytle="margin:0; height: 100%;">
+				<el-col :span="8" style="height: 100%;">
+					<div class="grid-content bg-white min-h f_l" style="width:calc(100% - 42px)">
+						<!-- 归档内容-->
+							<el-col :span="24">
+								<el-input placeholder="请输入文件名" v-model="searchInput" class="input-with-select" @keyup.enter.native="menuSearch">
+									<el-button slot="append" icon="el-icon-search" @click="menuSearch"></el-button>
+								</el-input>
+							</el-col>
+						</el-row>
+						<div class="m_t_20 f_l w_100">
+							<!--列出表-->
+							<el-col :span="24">
+								<el-tree
+								  :props="props"
+								  :load="loadNode"
+								  lazy
+								  show-checkbox
+								  :highlight-current="showTree"
+								  @check-change="handleCheckChange"
+								  @node-click="nodeClick"
+								  :render-content="renderTree">
+								</el-tree>
+							</el-col>
+						</div>
+					</div>
+				</el-col>
+
+				<el-col :span="16">
+					<div>
+						<div>
+							<!-- 归档-->
+							<el-form ref="form" :model="logForm" label-width="100px" class="grid-content bg-white f_l">
+                                <el-col :span="12">
+									<el-form-item label="归档表名">
+										<el-input readonly v-model="logForm.tabName" :title="logForm.tabName" :disabled="true"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :span="12">
+									<el-form-item label="归档类型" :span="5">
+										<el-select disabled v-model="logForm.tabType" placeholder="请选择归档类型">
+                                            <el-option label="事件表" value="event"></el-option>
+                                            <el-option label="拉链" value="dim"></el-option>
+                                        </el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :span="24">
+                                    <el-form-item label="恢复地址">
+                                        <el-input readonly v-model="logForm.recvrFileDir" :disabled="true"></el-input>
+                                    </el-form-item>
+                               </el-col>
+                                <el-col>
+									<div v-show="isDim">
+										<el-form-item label="恢复时间点">
+											<el-date-picker
+												v-model="dimDate"
+												align="right"
+												type="date"
+												value-format="yyyy-MM-dd"
+												placeholder="选择日期"
+												:picker-options="pickerOptions">
+											</el-date-picker>
+										</el-form-item>
+									</div>
+									<div class="f_l" v-show="!isDim">
+										<el-form-item label="恢复时间段">
+											<el-date-picker
+												v-model="startDate"
+												align="right"
+												type="date"
+												value-format="yyyy-MM-dd"
+												placeholder="选择日期"
+												:picker-options="pickerOptions">
+											</el-date-picker>
+										</el-form-item>
+									</div>
+									<div class="f_l" v-show="!isDim">
+										<el-form-item label-width="36px" label="至">
+											<el-date-picker
+												v-model="endDate"
+												align="right"
+												type="date"
+												value-format="yyyy-MM-dd"
+												placeholder="选择日期"
+												:picker-options="pickerOptions">
+											</el-date-picker>
+										</el-form-item>
+									</div>
+								</el-col>
+                                <el-button type="primary" plain @click="onDataRecve" class="f_r">执行恢复</el-button>
+                                <!--<el-col :span="11" :offset="1" style="line-height: 62.8px;">
+                                    <el-button type="primary" plain @click="onDataRecve">执行恢复</el-button>
+                                </el-col>-->
+                            </el-form>
+							<el-form ref="form" :model="logForm" label-width="80px" class="grid-content bg-white f_l m_t_10">
+								<el-col :span="24" class="m_b_10">
+									<div class="f_l l_h2">操作日志：</div>
+									<el-col :span="12">
+										<el-input placeholder="请输入文件名" v-model="log" class="input-with-select" @keyup.enter.native="onSearch">
+											<el-button slot="append" icon="el-icon-search" @click="onSearch"></el-button>
+										</el-input>
+									</el-col>
+								</el-col>
+								<el-table :data="tableData" height="200" border style="width: 100%">
+									<el-table-column prop="createDate" label="操作时间" width="160">
+									</el-table-column>
+									<el-table-column prop="operation" label="操作描述" width="180">
+									</el-table-column>
+									<el-table-column prop="username" label="操作人">
+									</el-table-column>
+									<el-table-column prop="mark" label="备注">
+									</el-table-column>
+								</el-table>
+								<!--分页-->
+								<div class="block">
+									<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="query.pageNum" :page-size="query.pageSize" layout="total, prev, pager, next, jumper" :total="query.recordCount">
+									</el-pagination>
+								</div>
+								<el-col :span="24">
+								</el-col>
+							</el-form>
+						</div>
+						<div>
+							<!-- 日志查询-->
+
+						</div>
+					</div>
+				</el-col>
+			</el-row>
+		</div>
+	</body>
+	<!-- import Vue before Element -->
+	<script src="../../static/js/vue.min.js"></script>
+	<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+	<!-- import JavaScript -->
+	<!--  <script src="../../plugins/element-UI/index.js"></script>-->
+
+	<script src="../../plugins/element-UI/lib/index.js"></script>
+	<script src="metaDataResume.js"></script>
+
+</html>

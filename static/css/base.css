@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+fieldset,img{border:0;}
+input,select,img{ vertical-align:middle;}
+input,select,textarea{outline: 0 none;}
+address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal;}
+ol,ul,li{list-style:none;}
+h2,h3{ font-size:12px;}
+h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:" ";}
+abbr,acronym{border:0;}
+html{height: 100%; font-size:100px; }
+body{height: 100%; font-size: 0.14rem; font-family:Microsoft Yahei, Arial, Helvetica, sans-serif;color:#fff; background:#fff;} 
+table{ width:100%; border-collapse:collapse;}
+a{ cursor:pointer; text-decoration:none;color:#fff;}
+a:hover{ color:#eee;}
+.clearfix{ clear:both;}
+.clearfix:after{clear:both;display:block;visibility:hidden;font-size:0;content:" ";height:0;}
+.clearfix {zoom:1;}
+
+*{ -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+/* font */
+.font_b{font-weight:bold;}
+.font_n{font-weight:normal;}
+
+/* position */
+.t_l{ text-align:left;}
+.t_r{ text-align:right;}
+.t_c{ text-align:center;}
+.v_t{ vertical-align:top;}
+.v_c{ vertical-align:middle;}
+.v_b{ vertical-align:bottom;}
+.f_r{ float:right; display:inline;}
+.f_l{ float:left; display:inline;}
+.c_both{clear:both;}
+.d_p_n{ display:none;}
+.d_p_b{ display:block;}
+
+
+/*color*/
+.c_red{ color:#df2a42;}
+.c_gray{ color:#666666;}
+.c_gray2{ color:#999999;}
+.c_yellow{ color:#f78a00;}
+.c_blue{ color:#1B94F9;}
+.c_green{ color:#4fa04b;}
+.c_black{ color:#000;}
+.c_white{ color: #ffffff;}
+
+/* radio & checkbox */
+select{padding:0.02rem; height:0.28rem; border: 1px solid #ccc;font-family: inherit; font-size: inherit;vertical-align: middle;color: inherit;background:#fff;}
+.radio{ margin:0 0.05rem;  vertical-align:-0.02rem;}
+.checkbox{ margin:0 0.05rem 0 2px;*margin:0 0.03rem 0 0px;vertical-align:-0.02rem;}
+  
+input[type="text"]:focus,input[type="password"]:focus,textarea{}
+  
+input[type="button"]:hover,button:hover{filter:alpha(opacity=80);opacity:0.8;}

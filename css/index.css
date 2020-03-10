@@ -1,0 +1,9 @@
+form{ background: #fff; padding-top: 1rem; padding-left: 1rem;}
+.el-table{ margin-top: 0.5rem; padding: 0 1rem;}
+.pagingBox{
+	display: flex;
+	align-items: center;
+	background:#fff;
+	padding: .4rem 0;
+}
+.el-pagination{ margin: 0 auto;}

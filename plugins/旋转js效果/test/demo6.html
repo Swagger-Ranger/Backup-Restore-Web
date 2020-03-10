@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Move Things Around Other Things</title>
+<style type="text/css">
+.codrops-demos{height:60px;text-align:center;}
+.codrops-demos a{display:inline-block;margin:10px;color:#333;font-weight:700;line-height:30px;border-bottom:4px solid transparent;text-decoration:none;}
+.codrops-demos a:hover{color:#883d59;border-color:#883d59;}
+.codrops-demos a.current-demo,.codrops-demos a.current-demo:hover{color:#aaa;border-color:#aaa;}
+
+ul{list-style:none;padding:0;margin:0 auto;width:36em;height:26em;}
+li{height:8em;width:8em;background-color:#fff;text-align:center;cursor:pointer;border:1px solid #bbb;-webkit-border-radius:4em;-moz-border-radius:4em;-ms-border-radius:4em;-o-border-radius:4em;border-radius:4em;}
+li.roundabout-in-focus{cursor:default;}
+li span{display:block;padding-top:3.5em;}
+.monolith{background-color:#222;color:#fff;text-align:center;width:300px;height:400px;position:absolute;z-index:260;left:135px;border-color:#222;opacity:0.92}
+</style>
+</head>
+<body>
+
+
+<ul class="demo">
+<li class="mover"><span>Thing</span></li>
+<li class="mover"><span>Thing</span></li>
+<li class="mover"><span>Thing</span></li>
+<li class="mover"><span>Thing</span></li>
+
+</ul>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.roundabout2.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('ul').roundabout({
+		minZ: 100,
+		maxZ: 300,
+		minOpacity: 1,
+		minScale: 0.6,
+		childSelector: '.mover',
+		tilt: -4,
+		autoplay:true
+	});
+	
+	/*setInterval(function() {
+		$('.demo').roundabout('adjustBearing', 5);
+	}, 100);*/
+});
+</script>
+</body>
+</html>

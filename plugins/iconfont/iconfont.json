@@ -1,0 +1,156 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "365349",
+      "name": "数据",
+      "font_class": "data",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    },
+    {
+      "icon_id": "444330",
+      "name": "商务 钱袋",
+      "font_class": "iconfontmoney",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "721634",
+      "name": "数据",
+      "font_class": "iconfontxinwen1",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "1258259",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "1615430",
+      "name": "数据",
+      "font_class": "shuju1",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "2200712",
+      "name": "数据",
+      "font_class": "shuju2",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "2421479",
+      "name": "数据",
+      "font_class": "tubiaozhizuomoban",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "2846410",
+      "name": "数据",
+      "font_class": "data1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "3424294",
+      "name": "数据",
+      "font_class": "shuju3",
+      "unicode": "e74b",
+      "unicode_decimal": 59211
+    },
+    {
+      "icon_id": "3586236",
+      "name": "数据",
+      "font_class": "shuju4",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "4936280",
+      "name": "数据",
+      "font_class": "shuju5",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "5607553",
+      "name": "数据",
+      "font_class": "data-copy",
+      "unicode": "e505",
+      "unicode_decimal": 58629
+    },
+    {
+      "icon_id": "6999449",
+      "name": "数据",
+      "font_class": "shuju6",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "7587058",
+      "name": "数据",
+      "font_class": "shujuku",
+      "unicode": "e6fa",
+      "unicode_decimal": 59130
+    },
+    {
+      "icon_id": "8113537",
+      "name": "数据",
+      "font_class": "shuju7",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "8344930",
+      "name": "数据",
+      "font_class": "shujuhuizong",
+      "unicode": "e502",
+      "unicode_decimal": 58626
+    },
+    {
+      "icon_id": "9376811",
+      "name": "数据",
+      "font_class": "shuju8",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "9418639",
+      "name": "商务管理",
+      "font_class": "shangwuguanli",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "9435545",
+      "name": "数据",
+      "font_class": "shuju9",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "9851228",
+      "name": "数据",
+      "font_class": "shuju10",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "10428735",
+      "name": "平台统计数据",
+      "font_class": "shujuan",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    }
+  ]
+}

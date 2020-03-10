@@ -1,0 +1,114 @@
+<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+<link rel="stylesheet" href="./nth.tabs.css">
+<script src="./nth.tabs.js"></script>
+<div class="container" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nth-tabs">
+                <!--
+                <div class="page-tabs">
+                    <div class="tabs-div">
+                        <a href="#" class="roll-nav roll-nav-left"><span class="fa fa-navicon"></span></a>
+                        <a href="#" class="roll-nav roll-nav-left"><span class="fa fa-backward"></span></a>
+                        <div class="content-tabs">
+                            <div class="content-tabs-container">
+                                <ul class="nav nav-tabs"></ul>
+                            </div>
+                        </div><a href="#" class="roll-nav roll-nav-right"><span class="fa fa-forward"></span></a>
+                        <div class="dropdown roll-nav right-nav-list"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-chevron-down"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="tab-location">定位当前选项卡</a></li>
+                                <li><a href="#" class="tab-close-current">关闭当前选项卡</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" class="tab-close-other">关闭其他选项卡</a></li>
+                                <li><a href="#" class="tab-close-all">关闭全部选项卡</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="scrollbar-outer tab-list-scrollbar">
+                                    <div class="tab-list-container">
+                                        <ul class="tab-list"></ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ext-div">
+
+                    </div>
+                </div>
+                <div class="tab-content" style="padding:20px"></div>
+-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="user-info">
+    <div class="user-img"><img src="" alt=""></div>
+    <div class="user-name">Anfo</div>
+</div>
+
+<script>
+    var nthTabs = $('.nth-tabs').nthTabs({
+        extDiv:{
+            enable:true,
+            width:100,
+            selector:'#user-info'
+        },
+        event:{
+            onClickNavIcon:function(){
+                console.log(this);
+            }
+        }
+    });
+    nthTabs.addTab({
+                id:'a',
+                title:'孙悟空',
+                content:'看我七十二变',
+            }).addTab({
+				/*换个姿势*/
+                id:'b',
+                title:'猪八戒-关不掉',
+                content:'高老庄娶媳妇',
+				active:true,
+				allowClose:false,
+            }).addTab({
+                id:'c',
+                title:'沙和尚',
+                content:'请叫我大叔',
+            }).addTab({
+                id:'d',
+                title:'唐僧',
+                content:'光头一个',
+            }).addTab({
+                id:'e',
+                title:'武松',
+                content:'打虎猛汉',
+            }).addTab({
+                id:'f',
+                title:'潘金莲',
+                content:'求爱爱',
+            }).addTab({
+                id:'g',
+                title:'来个标题长一点的的的来个标题长一点的的的',
+                content:'你赢了',
+            }).addTab({
+                id:'h',
+                title:'支持连贯操作',
+                content:'没错就是这么爽',
+            }).addTab({
+                id:'i',
+                title:'欢迎提意见',
+                content:'一定一定',
+            }).addTab({
+                id:'j',
+                title:'熬夜写的啊',
+                content:'码农苦逼~',
+            }).setActTab("#c");
+
+</script>

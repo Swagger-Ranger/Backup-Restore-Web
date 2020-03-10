@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理员列表</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet" href="../../static/css/custom.css">
+<link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+ -->
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../static/css/main.css">
+<!-- <link href="../../static/css/bootstrap-multiselect.css" rel="stylesheet"> -->
+<!-- <link rel="stylesheet" href="/modules/wechatPush/css/bootstrap-select.css"> -->
+ <!-- <link rel="stylesheet" href="../../static/css/jquery.mloading.css" media="screen">
+ --><script src="../../static/js/jquery.min.js"></script>
+<!-- <script src="../../static/js/jquery.mloading.js"></script> -->
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/vue.min.js"></script>
+<script src="../../static/js/validator.min.js"></script>
+<!-- <script src="../../plugins/jqgrid/grid.locale-cn.js"></script> -->
+<!-- <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script> -->
+
+<!-- bootstrap-table -->
+<!--<script src="/modules/wechatPush/common/multiselect_davidstutz/js/bootstrap-multiselect.js"></script>-->
+<script src="../../plugins/multiselect_davidstutz/js/bootstrap-multiselect.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/core/tableExport.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- <script src="/modules/wechatPush/js/bootstrap-select.js"></script> -->
+
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../static/js/commonUtil.js"></script>
+<script src="../../static/js/base.js"></script>
+<script src="../../static/js/bootstrapTableCommon.js"></script>
+<style>
+	.dropdown-menu li a label{
+		margin-left:4px;
+	}
+	.dropdown-menu{
+		margin:0;
+	}
+	
+</style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList" class="sc">
+	<!-- <div v-show="showList"> -->
+		<div id="table-toolbar" class="fixed-table-toolbar">
+		<!-- <div class="grid-btn"> -->
+			<div class="pull-left search">
+				<input type="text" class="form-control" v-model="q.username" @keyup.enter="query" placeholder="输入关键词">
+			</div>
+			<div class="pull-left search" style="margin-left: 5px;line-height: 34px;">状态：</div>
+			<div class="m-l-r-5 pull-left search">
+				<select class="form-control" v-model="q.status">
+					<option value='all'>全部</option>
+					<option value='0'>正常</option>
+					<option value='1'>禁用</option>
+					<option value='2'>未授权</option>
+				</select>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button class="btn btn-primary" id='btnSearch'>查询</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:update')" class="btn btn-primary" @click="reset"><i class="fa fa-trash-o"></i>&nbsp;重置密码</button>
+			</div>
+			<div class="dn m-l-r-5 pull-left search">
+				<button class="btn btn-primary" id='import'>导入</button>
+			</div>
+			<div class="dn m-l-r-5 pull-left search">
+				<button class="btn btn-primary" id='export'>导出</button>
+			</div>
+			<div class="dn m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:update')" class="btn btn-primary" @click="authorizedUser"><i class="fa fa-user-circle"></i>&nbsp;角色授权</button>
+			</div>
+			<div class="dn m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:update')" class="btn btn-primary" @click="authorizedUserData"><i class="fa fa-user-circle"></i>&nbsp;数据授权</button>
+			</div>
+		</div>
+    </div>
+    
+    <div class="modal fade" id="importUserBtjt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+				<form id="upformRpt" method="post" name="upload" action="" method= "post" enctype="multipart/form-data">
+				<div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+		            <h4 class="modal-title">导入</h4>
+		        </div>
+		        <div class="modal-body">
+					<div class="form-group">
+					    <input type="file" name="excel" id="uploadFile">
+					</div>
+					<div class="form-group">
+		           		<button id="downExcel" type="button" class="btn btn-default btn-xs" data-dismiss="modal">
+		           			<span class="glyphicon glyphicon-circle-arrow-down"></span>下载模板
+						</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+		            <button type="button" class="btn btn-default" data-dismiss="modal">
+		           		取消
+					</button>
+					<button type="button" class="btn btn-primary" id="uploadUserBtjt" data-dismiss="modal">
+		   				确认
+					</button>
+		       	</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    
+    <div v-show="showList" id="tb" class="tb">
+		<div id="reportTableDiv">
+			<table id="table"></table>
+		</div>
+	</div>
+    
+    <div v-show="!showList" class="panel panel-default m-t-5">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group" v-show="showColumn">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>登录账号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.username" placeholder="登录账号"/>
+			    </div>
+			</div>
+			<div class="form-group" v-show="showPassword">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>密码</div>
+			   	<div class="col-sm-10">
+			      <input id="password" type="password" class="form-control" v-model="user.password" placeholder="密码"/>
+			    </div>
+			</div>
+			<!-- <div class="dn form-group" v-show="showPassword">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>确认密码</div>
+			   	<div class="col-sm-10">
+			      <input id="password2" type="password" class="form-control" v-model="user.password2" placeholder="确认密码"/>
+			    </div>
+			</div> -->
+			<div class="form-group" v-show="showColumn">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>用户名</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.nickname" placeholder="用户名"/>
+			    </div>
+			</div>
+			<div class="form-group" v-show="showColumn">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>角色</div>
+			   	<div class="col-sm-10">
+					<select id="roleId" class="form-control" multiple="multiple"><!-- v-model="user.roleId" -->
+				    	<option v-for="item in itemList" v-bind:value="item.roleId">
+				        	{{ item.roleName }}
+				      	</option>
+					</select>
+			    </div>
+			</div>
+			<div class="form-group" v-show="showColumn">
+				<div class="col-sm-2 control-label"><span class="red">*</span>组织机构</div>
+				<div class="col-sm-10">
+					<input type="text" readonly="readonly" class="form-control" style="cursor:pointer;" v-model="org.orgShtNm" @click="orgTree"  placeholder="请选择"/>
+				</div>
+			</div>
+			<div class="dn form-group" v-show="showColumn">
+			   	<div class="col-sm-2 control-label"><span class="red">*</span>部门</div>
+			   	<div class="col-sm-10">
+			   		<select v-model="user.department" id="deptId" class="form-control">
+				    	<option v-for="item in itemDeptList" v-bind:value="item.deptId">
+				        	{{ item.name }}
+				      	</option>
+					</select>
+			      <!-- <input type="text" class="form-control" v-model="user.department" placeholder="部门"/> -->
+			    </div>
+			</div>
+			<div class="form-group dn" v-show="showColumn">
+			   	<div class="col-sm-2 control-label">职责</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.duty" placeholder="职责"/>
+			    </div>
+			</div>
+			<div class="form-group dn" v-show="showColumn">
+			   	<div class="col-sm-2 control-label">邮箱</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.email" placeholder="邮箱"/>
+			    </div>
+			</div>
+			<div class="form-group " v-show="showColumn">
+			   	<div class="col-sm-2 control-label">手机号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.mobile" placeholder="手机号"/>
+			    </div>
+			</div>
+			<div class="form-group dn" v-show="showColumn">
+			   	<div class="col-sm-2 control-label">员工编号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.employeeno" placeholder="员工编号"/>
+			    </div>
+			</div>
+			<div class="form-group" v-show="showColumn">
+				<div class="col-sm-2 control-label">性别</div> 
+				<label class="radio-inline">
+				  <input type="radio" name="gender" value="male" v-model="user.gender"/> 男
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="gender" value="female" v-model="user.gender"/> 女
+				</label>
+			</div>
+			<div class="form-group" v-show="showColumn">
+				<div class="col-sm-2 control-label">状态</div> 
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="0" v-model="user.status"/> 正常
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="1" v-model="user.status"/> 禁用
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 选择组织 -->
+<div id="orgLayer" style="display: none;padding:10px;">
+	<ul id="orgTree" class="ztree"></ul>
+</div>  
+
+<!-- 选择角色 -->
+<div id="roleLayer" style="display: none;padding:10px;">
+	<select id="selectRole" ref="mybox" class="form-control">		
+	</select>
+</div> 
+
+<!-- 查询角色授权 -->
+<div id="UserRoleLayer" style="display: none;padding:10px;">
+	<table id="UserRoleJqGrid"></table>
+	<div id="UserRoleJqGridPager"></div>
+</div>
+
+<!-- 添加角色授权 -->
+<div id="addUserRoleLayer" style="display: none;padding:10px;">
+	<table id="addUserRoleJqGrid"></table>
+	<div id="addUserRoleJqGridPager"></div>
+</div>
+
+<!-- 用户数据授权 -->
+<div id="UserDataLayer" style="display: none;padding:10px;">
+<div id="rrapp1">
+    <div v-show="!showList" class="panel panel-default">
+		<form class="form-horizontal w_p_100">
+		<div class="form-group">
+			   	<div class="col-sm-1"></div>
+				<ul class="nav nav-tabs col-sm-11 roleAuthTab" id="roleAuthTab">
+	<!-- 			    <li class="active"><a href="#menuTreeTab" data-toggle="tab">菜单授权</a></li>
+				   <li class=""><a href="#userTreeTab" data-toggle="tab">用户授权</a></li> 
+				    <li class=""><a href="#dataTreeTab" data-toggle="tab">数据授权</a></li>
+ -->				</ul>
+		   	</div>
+		
+			<div class="form-group">
+				<div class="tab-content" id="dataTree">
+				    <div class="tab-pane fade in active" id="menuTreeTab">
+					   		<div class="col-sm-1"><span  style="font-weight: 600;">可授权：</span></div>
+					   	<div class="col-sm-4">
+						  <input type="text" class="form-control" v-model="q.menuname" id="queryname"  placeholder="名称">
+ 					      <ul id="menuTree" class="ztree tree-div"></ul>
+					    </div>
+					    <div class="col-sm-1"><a class="btn btn-primary" onClick="reloadDataTree()"><i class="fa fa-eye"></i>&nbsp;查询</a>
+					    <a class="btn btn-primary" style="margin-top:20px" onClick="saveAuthData()"><i class="fa fa-arrow-right"></i>&nbsp;保存</a>
+					       <a class="btn btn-primary" style="margin-top:20px" onClick="deleteAuthData()"><i class="fa fa-arrow-left"></i>&nbsp;删除</a>
+					    </div>
+				
+					    
+					   	<div class="col-sm-1"><span style="font-weight: 600;display">已授权：</span></div>
+					   	<div class="col-sm-4">
+					   	<input type="text" class="form-control" v-model="q.menuname" id="querydname"  placeholder="名称">
+					      <ul id="menuAuthTree" class="ztree tree-div"></ul>
+					    </div>
+					      <div class="col-sm-1"><a class="btn btn-primary" onClick="reloadDataAuthTree()"><i class="fa fa-eye"></i>查询</a>
+					    <a class="btn btn-primary" style="margin-top:20px" onClick="saveDefaultAuthData()"><i class="fa fa-check-circle"></i>默认</a>
+					    </div>
+				    </div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<script src="user-table.js"></script>
+<script src="user-btjt.js"></script>
+<script src="../../plugins/Bootstrap-Show-Password/js/hideShowPassword.js"></script>
+</body>
+</html>

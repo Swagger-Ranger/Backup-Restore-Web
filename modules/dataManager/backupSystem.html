@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="metadata/css/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="metadata/css/base.css">
+  <link rel="stylesheet" href="metadata/css/index.css" />
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+	<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="../../static/js/common.js"></script>
+	<script src="../../static/js/commonUtil.js"></script>
+	<script type="text/javascript" src="../../static/js/commonGobalValue.js"></script>
+</head>
+<body>
+  <div id="app">
+		<el-form :inline="true" :model="formInline" class="demo-form-inline" size="small">
+		  <el-form-item label="源系统名">
+		    <el-input v-model="formInline.hdssysCname" placeholder="源系统名"></el-input>
+		  </el-form-item>
+		  <el-form-item>
+		    <el-button type="primary" @click="getTableData" icon="el-icon-search">查询</el-button>
+		    <el-button type="primary" @click="addFile" icon="el-icon-plus">新增</el-button>
+		    <el-button type="primary" @click="editFile" icon="el-icon-edit-outline">修改</el-button>
+		    <el-button type="primary" @click="deleteSys" icon="el-icon-delete">删除</el-button>
+		  </el-form-item>
+		</el-form>
+		<!--表格-->
+		<el-table
+		ref=multipleTable
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      width="50">
+    </el-table-column>
+     <el-table-column
+      type="selection"
+      width="55">
+    </el-table-column>
+     <el-table-column
+      prop="myccbid"
+      label="id"
+      v-if="false"
+      width="0">
+    </el-table-column>
+    <el-table-column
+      prop="hdssysCname"
+      label="源系统名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="hdssysName"
+      label="源系统英文名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="dbname"
+      label="源系统数据库名">
+    </el-table-column>
+			<el-table-column
+					prop="hdssysUser"
+					label="源系统数据库账户">
+			</el-table-column>
+			<el-table-column
+					prop="hdssysPwd"
+					label="源系统数据库账户密码">
+			</el-table-column>
+    <el-table-column
+      prop="createtime"
+      label="创建时间">
+    </el-table-column>
+  </el-table>
+  <!---->
+  <!--分页-->
+  <div class="pagingBox">
+  	<el-pagination
+		  @size-change="handleSizeChange"
+		  @current-change="handleCurrentChange"
+		  :current-page="currentPage"
+		  :page-sizes="pageSizes"
+		  :page-size="pageSize"
+		  layout="total, sizes, prev, pager, next, jumper"
+		  :total="total">
+		</el-pagination>
+  </div>
+  
+  <!---->
+  <!--对话框-->
+  <el-dialog :title="title" :visible.sync="dialogFormVisible" @close='closeDialog'>
+	  <el-form :model="form" :rules="rules" ref="form" size="small">
+	    <el-form-item label="归档系统中文名" prop="hdssysCname" :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysCname" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="归档系统英文名" prop="hdssysName" :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysName" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="归档系统库名" prop="dbname" :label-width="formLabelWidth">
+	      <el-input v-model="form.dbname" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="归档系统数据库用户" prop="hdssysUser" :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysUser" autocomplete="off"></el-input>
+	    </el-form-item>
+		  <el-form-item label="归档系统数据库密码" prop="hdssysPwd" :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysPwd" autocomplete="off"></el-input>
+	    </el-form-item>
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="cancle" size="small">取 消</el-button>
+	    <el-button type="primary" @click="sub" size="small">确 定</el-button>
+	  </div>
+	</el-dialog>
+<!---->
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="metadata/script/lib/vue.js" type="text/javascript" charset="utf-8"></script>
+  <!-- import JavaScript -->
+  <script type="text/javascript" src="metadata/script/lib/jquery.min.js" ></script>
+  <script src="metadata/script/lib/element-ui.js"></script>
+  <script src="metadata/script/backupSystem.js"></script>
+</html>

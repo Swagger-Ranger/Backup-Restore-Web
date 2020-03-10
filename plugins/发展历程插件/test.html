@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+	<title>测试</title>
+	<link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css" />
+	<style>
+		.popover {
+			max-width: 740px;
+		}
+
+		.round1 {
+			font-size: 34px;
+			color: #FF0000;
+			text-shadow: #f00 0px 0px 8px;
+		}
+
+		.round2 {
+			font-size: 34px;
+			color: #FFC000;
+			text-shadow: #f00 0px 0px 8px;
+		}
+
+		.round3 {
+			font-size: 34px;
+			color: #88E181;
+			text-shadow: #FDCD5F 0px 0px 18px;
+		}
+
+		.prj {
+			color: #000;
+			cursor: pointer;
+			text-decoration: none
+		}
+
+		.prj:hover {
+			text-decoration: none
+		}
+
+		.r1 {
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			margin: 0 auto;
+		}
+
+		.r2 {
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			position: relative;
+			top: 5px;
+			margin: 0 auto;
+		}
+
+		.r3 {
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			position: relative;
+			top: 5px;
+			margin: 0 auto;
+		}
+
+		.red1 {
+			background-color: #FFF6F5
+		}
+
+		.red2 {
+			background-color: #FEE9E8
+		}
+
+		.red3 {
+			background-color: #FF6D6D
+		}
+
+		.yellow1 {
+			background-color: #FEFFF7;
+		}
+
+		.yellow2 {
+			background-color: #FEFBE8;
+		}
+
+		.yellow3 {
+			background-color: #FDCD5F;
+		}
+
+		.green1 {
+			background-color: #F5FFF7
+		}
+
+		.green2 {
+			background-color: #E8FEF1
+		}
+
+		.green3 {
+			background-color: #87E181
+		}
+
+		.table tr td:nth-child(1) {
+			vertical-align: middle;
+		}
+
+
+		.circle2 {
+			top: -41px;
+			left: 79px;
+			content: '';
+			border-color: transparent;
+			border-style: solid;
+			position: absolute;
+			border-width: 22px;
+			border-bottom-color: #eee9dc;
+		}
+
+		h2 {
+			text-align: center
+		}
+
+		.timeline {
+			position: relative;
+			list-style: none;
+			margin: 20px 0 0 120px;
+		}
+
+		.timeline li {
+			position: relative;
+		}
+
+		.date {
+			left: -108px;
+			top: 3px;
+			width: 80px;
+			position: absolute;
+		}
+
+		.circle {
+			left: -17px;
+			width: 26px;
+			height: 26px;
+
+			/*border: 5px solid #eee9dc;*/
+			border-radius: 50%;
+			position: absolute;
+		}
+
+		.circle1-color {
+			border: 5px solid #EBFFE5;
+			background: #88E181;
+		}
+
+		.circle2-color {
+			border: 5px solid #FFFAE5;
+			background: #FDCD5F;
+		}
+
+		.circle3-color {
+			border: 5px solid #FFE5E8;
+			background: #FF4E63;
+		}
+
+		.content {
+			position: relative;
+			margin: 0 0 0 20px;
+			min-height: 61.6px;
+		}
+
+		.span-label {
+			/*font-size: 22px;*/
+			/*color: #fff;*/
+			padding: 2px;
+			/*border-radius: 5%;*/
+			font-weight: bold;
+			font-size: 16px;
+		}
+
+		.p-color {
+			color: #888888;
+			/*min-height: 30px;*/
+			/*font-size:13px;*/
+		}
+
+		.label1-color {
+			background-color: #00B050;
+		}
+
+		.label2-color {
+			background-color: #FFC000;
+		}
+
+		.label3-color {
+			background-color: #FF0000;
+		}
+
+		#detail p {
+			height: 30px;
+		}
+
+		down1 {
+			color: #00B050
+		}
+
+		down2 {
+			color: #FFC000
+		}
+
+		down3 {
+			color: #FF0000;
+		}
+
+		.timeline p {
+			margin: 0;
+		}
+
+		.timeline li {
+			border-left: 8px dotted #E8E9E8;
+		}
+
+		.timeline li:last-child {
+			border-left: none;
+			margin-left: 7px
+		}
+	</style>
+</head>
+
+<body>
+	<div style="width:100%;height:600px;padding:10px;overflow-y:auto">
+		<div style="float:left;width:26%">
+			<div id="detail" style="border-radius: 4%;width:100%;height:230px;background-color:#fff;box-shadow: 0 10px 30px #E1E1E1;padding:25px 30px 20px 30px;margin-left:10px">
+				<div style="width:40%;height:100%;float:left;color:#888888">
+					<p>产品类型：</p>
+					<p>管理类型：</p>
+					<p>信托类型：</p>
+					<p>业务部门：</p>
+					<p>信托经理：</p>
+				</div>
+				<div style="width:60%;height:100%;float:left" id="pDetail">
+					<p>集合</p>
+					<p>主动管理</p>
+					<p>债权信托</p>
+					<p>杭州业务四部</p>
+					<p>吴朋、丁粟冰</p>
+				</div>
+			</div>
+		</div>
+		<div style="float:left;width:74%">
+			<ul class="timeline" id="timeLine">
+				<li><span class="date">2020/07/04</span>
+					<div class="circle circleNaN-color"></div>
+					<div class="content" id="con7"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="计划结束日期至业务结束操作实际日期 <=3 或 展期日期至展期操作实际日期 <= 3 为绿灯<br></span>4<= 计划结束日期至业务结束操作实际日期 <=7 或 4<= 展期日期至展期操作实际日期 <= 7 为黄灯<br/>计划结束日期至业务结束操作实际日期 >=8 或 展期日期至展期操作实际日期 >= 8 为红灯"
+						 data-trigger="hover" data-original-title="" title="">产品结束</span>
+						<p class="p-color"><span>项目存续期,存续规模7,510.00万元;</span></p>
+						<p class="p-color">累计信托报酬103.35万元</p>
+					</div>
+				</li>
+				<li><span class="date">2018/12/28</span>
+					<div class="circle circle1-color"></div>
+					<div class="content" id="con6"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="" data-trigger="hover" data-original-title="" title="">收支情况</span>
+						<p class="p-color"><span>该项目共有收支计划22次,其中2次按时,20次逾期.逾期明细如下:<span></span></span></p>
+						<p class="p-color"><span style="color:#FF0000">1. 收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="p-color"><span style="color:#FF0000">2. 收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span><span title="查看全部"
+							 onclick="down(6)" style="margin-left: 10px; color: rgb(136, 225, 129); display: inline-block;" class="glyphicon glyphicon-chevron-down"></span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">3.
+								收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">4.
+								收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">5.
+								收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">6.
+								收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">7.
+								收入-融资利息-计划日期:20190104,暂未收款,逾期:12工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">8.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">9.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">10.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">11.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">12.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">13.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">14.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">15.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">16.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">17.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">18.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">19.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span></p>
+						<p class="str2 p-color" style="display: none;"><span style="color:#FF0000">20.
+								收入-融资利息-计划日期:20181228,暂未收款,逾期:16工作日;</span><span title="收缩" onclick="up(6)" style="margin-left: 10px; color: rgb(136, 225, 129); display: none;"
+							 class="glyphicon glyphicon-chevron-up"></span></p>
+					</div>
+				</li>
+				<li><span class="date">2018/12/28</span>
+					<div class="circle circle2-color"></div>
+					<div class="content" id="con5"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="产品发行至产品成立所用时间 <=3 为绿灯<br></span>4<= 产品发行至产品成立所用时间 <=7 为黄灯<br/>产品发行至产品成立所用时间 >=8 为红灯<br/>针对分批成立的项目，存在某个批次为红灯则为红灯；不存在红灯但存在黄灯则为黄灯，均为绿灯则为绿灯"
+						 data-trigger="hover" data-original-title="" title="">成立情况</span>
+						<p class="p-color"><span style="color:#FFC000">1.
+								2018/12/28,推介期(首次成立流程),成立4,270.00万元,资金进账开始(20181221)至产品成立(20181228)所用工作日天数为6天;</span></p>
+						<p class="p-color"><span>2.
+								2018/12/28,开发期第一期,成立830.00万元,资金进账开始(20181226)至产品成立(20181228)所用工作日天数为3天;</span></p>
+						<p class="p-color"><span>3.
+								2019/01/04,开放期第二期,成立2,410.00万元,资金进账开始(20190102)至产品成立(20190104)所用工作日天数为3天;</span></p>
+					</div>
+				</li>
+				<li><span class="date">2018/12/18</span>
+					<div class="circle circle1-color"></div>
+					<div class="content" id="con4"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="准许募集时间至实际募集开始时间 <=3 为绿灯<br></span> 4<= 准许募集时间至实际募集开始时间 <=7 为黄灯<br/>准许募集时间至实际募集开始时间 >=8 为红灯"
+						 data-trigger="hover" data-original-title="" title="">募集情况</span>
+						<p class="p-color"><span>项目当前募集总规模7,610.00万元,准许募集时间(20181218)至实际募集开始时间(20181221)为3个工作日</span></p>
+					</div>
+				</li>
+				<li><span class="date">2018/06/27</span>
+					<div class="circle circle2-color"></div>
+					<div class="content" id="con3"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="报备发起至审批结束所用天数 <=3 为绿灯 <br></span>4<= 报备发起至审批结束所用天数 <=7 为黄灯<br/>报备发起至审批结束所用天数 >=8 为红灯"
+						 data-trigger="hover" data-original-title="" title="">事前报备</span>
+						<p class="p-color"><span>该项目共发起2次事项调整流程,其中1次时长小于3天,1次时长小于7天,0次时长大于8天.异常明细如下:<span></span></span></p>
+						<p class="p-color"><a target="_blank" style="color:#FFC000" href="http://10.68.2.31:7001/projects/problem_info_2013.jsp?project_id=85&amp;problem_id=163078">1.
+								暂无异议,报备发起(20190110)至审批结束(20190116)所用工作日天数为5天;</a></p>
+						<p class="p-color"></p>
+					</div>
+				</li>
+				<li><span class="date">2018/11/22</span>
+					<div class="circle circle3-color"></div>
+					<div class="content" id="con2"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="" data-trigger="hover" data-original-title="" title="">事项调整</span>
+						<p class="p-color"><span>该项目共发起3次事项调整流程,其中2次时长小于3天,0次时长小于7天,1次时长大于8天.异常明细如下:</span></p>
+						<p class="p-color"><a target="_blank" style="color:#FF0000" href="http://10.68.2.31:7001/projects/problem_info_2013.jsp?project_id=79&amp;problem_id=156236">1.
+								事项调整流程审核通过.流程审批开始(20181122)至审批结束(20181204)所用工作日天数为8天.</a></p>
+					</div>
+				</li>
+				<li><span class="date">2018/05/11</span>
+					<div class="circle circle3-color"></div>
+					<div class="content" id="con1"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="项目审查发起至审批结束所用天数 <=3 为绿灯<br></span>4<= 项目审查发起至审批结束所用天数 <=7 为黄灯<br/>项目审查发起至审批结束所用天数 >=8 为红灯"
+						 data-trigger="hover" data-original-title="" title="">审批情况</span>
+						<p class="p-color"><a target="_blank" style="color:#FF0000" href="http://10.68.2.31:7001/projects/problem_info_2013.jsp?project_id=78&amp;problem_id=135500">上会项目表决通过,项目审查发起(20180511)至审批结束(20180621)所用工作日天数为29天</a></p>
+					</div>
+				</li>
+				<li><span class="date">2018/04/18</span>
+					<div class="circle circle2-color"></div>
+					<div class="content" id="con0"><span class="span-label" data-html="true" data-toggle="popover" data-placement="right"
+						 data-container="body" data-content="立项发起至立项结束所用天数 <=3 为绿灯<br></span>4<= 立项发起至立项结束所用天数 <=7 为黄灯<br/>立项发起至立项结束所用天数 >=8 为红灯"
+						 data-trigger="hover" data-original-title="" title="">立项情况</span>
+						<p class="p-color"><a target="_blank" style="color:#FFC000" href="http://10.68.2.31:7001/projects/problem_info_2013.jsp?project_id=103&amp;problem_id=133156">立项审批通过,立项发起(20180418)至立项结束(20180423)所用工作日天数为4天</a></p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="jquery-1.12.3.min.js"></script>
+	<script>
+		function up(n) {
+			$('#con' + n).find('.glyphicon-chevron-up').hide();
+
+			$('#con' + n).find('.str2').slideUp(function () {
+				$('#con' + n).find('.glyphicon-chevron-down').show();
+			});
+		}
+
+		function down(n) {
+			$('#con' + n).find('.glyphicon-chevron-down').hide();
+
+			$('#con' + n).find('.str2').slideDown(function () {
+				$('#con' + n).find('.glyphicon-chevron-up').show();
+			})
+		}
+	</script>
+</body>
+
+</html>

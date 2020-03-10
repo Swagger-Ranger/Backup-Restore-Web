@@ -1,0 +1,100 @@
+.servers-wrapper {
+            padding: 16px;
+        }
+
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        a, body {
+            color: #333;
+        }
+        .servers-wrapper .text-num-model .value-p {
+            height: 276px;
+            line-height: 276px;
+            text-align: center;
+        }
+        body {
+            /*background: #edeeed;*/
+            font-family: "PingFangSC-Light,Helvetica Neue,Helvetica,Microsoft Yahei,Arial,Hiragino Sans GB,tahoma,SimSun,sans-serif";
+        }
+        .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+            display: table;
+            content: " ";
+        }
+        @media (min-width: 992px)
+        .col-md-2 {
+            width: 16.66666667%;
+        }
+        @media (min-width: 992px)
+        .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+            float: left;
+        }
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        article, aside, blockquote, body, button, code, dd, details, div, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+            margin: 0;
+            padding: 0;
+        }
+        .servers-wrapper.mysql-model .text-num-model {
+            height: 250px;
+        }
+        .servers-wrapper .text-num-model.text {
+            width: 100%;
+            height: 210px;
+            overflow: hidden;
+            border: 1px solid #e8e8e8;
+            margin: 0 auto;
+            margin-bottom: 16px;
+        }
+        .servers-wrapper .text-num-model.text>.title {
+            height: 36px;
+            line-height: 36px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e8e8e8;
+            padding-left: 10px;
+        }
+        .servers-wrapper .text-num-model.text>.title span {
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+        }
+        .servers-wrapper.mysql-model .text-num-model .value-p {
+            height: 150px;
+            line-height: 150px;
+        }
+        .servers-wrapper.mysql-model .text-num-model .text-1 {
+            font-size: 18px;
+        }
+        .servers-wrapper .text-num-model .text-1 {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .todo-card{cursor: pointer;}
+        
+        .servers-wrapper.mysql-model .text-num-model .value-p>.state .success {
+            color: #3c0;
+        }
+        .iconfont {
+            font-family: iconfont!important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .servers-wrapper.mysql-model .text-num-model .value-p>b {
+            font-size: 56px;
+        }
+        .servers-wrapper.mysql-model .text-num-model .value-p>.state>i {
+            font-size: 50px;
+        }
+        .col-md-3{width:20%;cursor: pointer;}

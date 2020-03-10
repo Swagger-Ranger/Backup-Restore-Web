@@ -1,0 +1,22 @@
+html{ background-color: #F0F2F5; height: 100%;}
+body{ height: calc(100% - 16px);}
+#app{ height: 100%;}
+.bg-white{ background-color: #fff;}
+.bg-menu{ background-color: #FAFAFA;}
+.w-200{ width: 12.5rem;}
+.h100{ height: 100%;}
+.f-l{ float: left;}
+.f-r{ float: right;}
+.m-l10{ margin-left: 10px;}
+.m-r5{ margin-right: 5px;}
+.m-r15{ margin-right: 15px;}
+.m-r30{ margin-right: 30px;}
+.m-l20{ margin-left: 20px;}
+.m-t10{ margin-top: 10px;}
+.m-b10{ margin-bottom: 10px;}
+.m-b20{ margin-bottom: 20px;}
+.p-t10{ padding-top: 10px;}
+.p-b10{ padding-bottom: 10px;}
+.p-l10{ padding-left: 10px;}
+.p-r10{ padding-right: 10px;}
+.f-wb{ font-weight: bold;}

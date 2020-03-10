@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>微信认证</title>
+    
+    <link rel="stylesheet" type="text/css" href="modules/wechatAuth/css/mobiscroll_date.css" />
+    <link rel="stylesheet" type="text/css" href="modules/wechatAuth/css/mobiscroll.css" />
+    <link rel="stylesheet"  type="text/css" href="modules/wechatAuth/css/base.css" />
+    <link rel="stylesheet"  type="text/css" href="modules/wechatAuth/css/all.css" />
+    <script type="text/javascript" src="modules/wechatAuth/js/all.js"></script> 
+    <script type="text/javascript" src="modules/wechatAuth/js/jquery-2.2.0.min.js"></script> 
+    <script type="text/javascript" src="modules/wechatAuth/js/common.js"></script>
+    <script type="text/javascript" src="static/js/commonGobalValue.js"></script>
+    <style>
+
+        #tt{
+           margin:0 auto;
+            width:100px;
+            height:15px;
+            position: absolute;
+            top:47%;
+            margin-top:-7.5px;
+            left: 50%;
+            margin-left:-40px;
+            font-size: 18px;
+            color: #161530;
+            font-weight: 400;
+        }
+        #loading{
+            margin:0 auto;
+            width:32px;
+            height:32px;
+            position: absolute;
+            top:52%;
+            margin-top:-16px;
+            left: 50%;
+            margin-left:-16px;
+            background:url(modules/wechatAuth/images/loading.gif) 
+        }
+    </style>
+</head>
+<body>
+    <div id="dd">
+        <div id="tt">
+            
+        </div>
+        <div id="loading"></div>
+
+    </div>
+</body>
+<script type="text/javascript">   
+   
+   $(function(){
+        wxLogin();
+   })
+
+function wxLogin() {
+  $("#tt").html("正在加载");
+  /*
+   *URLString：获取当前页面的解码的后面备用
+   */
+  var URLString=decodeURI(window.location.href);
+  // var appId = 'wx230b9faf2870c155';
+  var appId = getUrlParam("corpId");
+  var resourcesId = getUrlParam("resourcesId");
+
+  // var sss='http://km.highjet.com.cn:7003/wx-index.html?page=modules/wechatDemo/index.html&menuId=5038';
+  
+  var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId 
+          + "&redirect_uri=" + location.href.split('#')[0]
+          + "&response_type=code&scope=snsapi_base&state=no&connect_redirect=1#wechat_redirect";
+  var code = getUrlParam("code");
+  if (!code) {
+    window.location = url;
+  } else {
+    var hostname = 'http://' + window.location.host + '/';
+    var errorUrl=hostname+'wx-error.html';
+    let ajaxTimeOut = $.ajax({
+        type: 'GET',
+        url:hostname + weChatURL +'/wechat/oauth2/oauth2User',
+        contentType: "application/json", 
+        timeout: 15000,
+        data: {
+          code: code,
+          resourcesId: resourcesId
+        },
+        success: function (r) {
+          // console.log(r);
+          // alert(r);
+          if(r.code==0){
+            var link = '?'
+            if (r.url.indexOf('?') != -1) {
+              link = '&'
+            }
+            if(r.to=='yes'){
+              var backurl=hostname + r.url;
+              // setCookie("token",r.token,1);
+              window.location=backurl;
+             }else if(r.to=='no'){
+                window.location=URLString;
+             }else if(r.msg='success'){
+                var backurl=hostname + r.url;
+                //设置token
+                // setCookie("token",r.token,1);
+                window.location=backurl;
+             }else{
+                window.location=errorUrl
+             }
+          }else{
+            window.location=errorUrl;
+          }
+        }.bind(this),
+          error: function (xhr, status, err) {
+        }.bind(this),
+          complete: function (XMLHttpRequest, status) { //当请求完成时调用函数
+          if (status == 'timeout') {//status == 'timeout'意为超时,status的可能取值：success,notmodified,nocontent,error,timeout,abort,parsererror 
+            //console.log("请求超时");
+            ajaxTimeOut.abort(); //取消请求
+            $("#tt").html("网络不稳定，请求超时");
+          }
+        }
+      })
+    }
+  }
+
+function getUrlParam(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]);
+  return null;
+}
+</script>
+</html>

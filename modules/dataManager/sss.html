@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>海捷demo</title>
+  <script src="../../static/js/jquery.min.js"></script>
+  <!-- <script src="analysisgraph.min.js"></script> -->
+</head>
+<body>
+	<div class="eui-layout-row-3 eui-layout-row-offset-1 eui-layout-row-last eui-padding-left-15 eui-padding-right-15 eui-padding-bottom-10 eui-scroll-auto" id="svg-parent-container">
+        <div id="svg-container" class="eui-block eui-height-max" style="position: relative; touch-action: none;">
+            <svg style="width: 100%; height: 100%; display: block; min-width: 1347px; min-height: 481px;">
+            	<g>
+                    <g></g>
+                    <g id="g-container">
+
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    var table_data = new Array();
+    var table_data_1={title:'公共域',content:['fdsfs','认证计费','校医院管理系统','校园卡系统','一卡通系统','ggg']};
+    var table_data_2={title:'教学域',content:['教务系统','学工系统','研究生系统']};
+    var table_data_3={title:'科研域',content:['科研系统','学位论文']};
+    var table_data_4={title:'前置域',content:['前置系统']};
+    var table_data_5={title:'全局域',content:['共享系统','全局系统']};
+    var table_data_6={title:'生活域',content:[]};
+    var table_data_7={title:'文化域',content:['图书馆系统']};
+    var table_data_8={title:'行政域',content:[]};
+
+    table_data.push(table_data_1);
+    table_data.push(table_data_2);
+    table_data.push(table_data_3);
+    table_data.push(table_data_4);
+    table_data.push(table_data_5);
+    table_data.push(table_data_6);
+    table_data.push(table_data_7);
+    table_data.push(table_data_8);
+
+    var margin=10;
+    var start_x=21;//第一个表格的起始坐标x
+    var start_y=20;//表二个表格的起始坐标y
+    var th_width=205;//表格表头的宽度
+    var th_height=30;//表格表头的高度
+    var width=205;//表格的宽度
+    var td_width=185;//表格内容行的宽度
+    var td_height=30;//表格内容行的高度
+    var a=30;//垂直方向的两个表格的间隔30px;
+    var table_space=145;//水平方向的两个表格的间隔140px;
+    var c=4;//每行四个表
+    var blue="#39b3d7";//表头颜色码
+	$(function() {
+        var table_1_html='';
+        for(var i=0;i<4;i++){
+
+            table_rect_x=start_x+th_width*i+(table_space+20)*i;
+            table_rect_y=start_y;
+            table_height=(table_data[i].content.length+1)*40;
+            // console.log(table_rect_x);console.log(table_rect_y);
+            // console.log(table_height);
+
+            table_translate_x=table_rect_x+5;
+            table_translate_y=start_y+8;
+            // console.log(translate_x);console.log(translate_y);
+
+            table_path_d_M_x=table_rect_x;
+            table_path_d_M_y=start_y+td_height;
+            table_path_d_L1_1=table_path_d_M_x;
+            table_path_d_L1_2=start_y;
+            table_rect_y=table_path_d_L1_2;
+            table_path_d_L2_1=table_path_d_M_x+td_width+2*margin;
+            table_path_d_L2_2=table_path_d_L1_2;
+            table_path_d_L3_1=table_path_d_L2_1;
+            table_path_d_L3_2=table_path_d_M_y;
+
+            table_image_x=table_path_d_L2_1-20;
+            table_image_y=start_y+7;
+
+            table_d="'M "+table_path_d_M_x+" "+table_path_d_M_y+" L "+table_path_d_L1_1+" "+table_path_d_L1_2+" L "+table_path_d_L2_1+" "+table_path_d_L2_2+" L "+table_path_d_L3_1+" "+table_path_d_L3_2+" Z'";
+            // console.log(d);
+            // console.log(image_x);console.log(image_y);
+            // console.log(table_data[i].title);
+            // console.log(table_data[i]);
+            table_1_html+=
+            '<g style="visibility: visible; cursor: default;">'+
+                '<rect x='+table_rect_x+' y='+table_rect_y+' width='+th_width+' height='+table_height+' fill="#ffffff" stroke="#39b3d7" stroke-width="2" pointer-events="all"></rect>'+
+                '<path d='+table_d+' fill="#39b3d7" stroke="#39b3d7" stroke-width="2" stroke-miterlimit="10" pointer-events="all"></path>'+
+            '</g>'+
+            '<g style="cursor: default;">'+
+                '<g transform="translate('+table_translate_x+','+table_translate_y+')">'+
+                    '<foreignObject style="overflow:visible;" pointer-events="all" width="180" height="17">'+
+                        '<div style="display:inline-block;font-size:14px;font-family:微软雅黑;color:#ffffff;line-height:1.2;vertical-align:top;white-space:nowrap;">'+
+                            '<div style="width: 180px;"><span class="eui-icon" style="color:#ffffff;"></span>'+
+                                '<div style="display: inline-block;">'+table_data[i].title+'</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</foreignObject>'+
+                '</g>'+
+            '</g>'+
+            '<g style="cursor: pointer; visibility: visible;">'+
+                '<image x='+table_image_x+' y='+table_image_y+' width="16" height="16" xlink:href="http://47.92.105.181:8083/edgdemo/emeta/images/up_arrow.png" preserveAspectRatio="none"></image>'+
+            '</g>';
+
+            // console.log(table_1_html);
+            // var table_1_td_all="";
+            // console.log(table_data[i].content);
+            // for(var j=0;j<table_data.length;j++){
+            for(var j=0;j<4;j++){
+                // console.log(createTd(table_data[i]));
+                table_1_html+=createTd(table_data[j],j);
+            }
+            // table_1_html+=table_1_td_all;
+        }
+
+        // console.log(table_1_td_all);
+        // console.log(table_1_html);
+        $("#g-container").html(table_1_html);
+	})
+
+    function createTd(table_data_1,j){
+        var table_1_td_all='';
+        for(var i=0;i<table_data_1.content.length;i++){
+            rect_x=start_x+margin+j*370;
+            path_d_M_x=rect_x;
+            path_d_M_y=start_y+margin*(i+1)+td_height*(i+2);
+            path_d_L1_1=rect_x;
+            path_d_L1_2=path_d_M_y-td_height;
+            rect_y=path_d_L1_2;
+            path_d_L2_1=path_d_M_x+td_width;
+            path_d_L2_2=path_d_L1_2;
+            path_d_L3_1=path_d_L2_1;
+            path_d_L3_2=path_d_M_y;
+            translate_x=rect_x+5;
+            translate_y=rect_y+7;
+
+            console.log(rect_x);console.log(rect_y);
+
+            d="'M "+path_d_M_x+" "+path_d_M_y+" L "+path_d_L1_1+" "+path_d_L1_2+" L "+path_d_L2_1+" "+path_d_L2_2+" L "+path_d_L3_1+" "+path_d_L3_2+" Z'";
+            // console.log(rect_x);console.log(rect_y);
+            // console.log(d);
+            table_1_td_all+=
+            '<g transform="translate(0.5,0.5)" style="visibility: visible;">'+
+                '<rect x='+rect_x+' y='+rect_y+' width="185" height='+td_height+' fill-opacity="0.7" fill="#ffffff" stroke="#39b3d7" pointer-events="all"></rect>'+
+                '<path d='+d+' fill-opacity="0.7" fill="#39b3d7" stroke="#39b3d7" stroke-miterlimit="10" pointer-events="all"></path>'+
+            '</g>'+
+            '<g style="">'+
+                '<g transform="translate('+translate_x+','+translate_y+')">'+
+                    '<foreignObject style="overflow:visible;" pointer-events="all" width="160" height="17">'+
+                        '<div style="display:inline-block;font-size:12px;font-family:微软雅黑;color:#ffffff;line-height:1.2;vertical-align:top;white-space:nowrap;">'+
+                            '<div style="width: 160px;"><span class="eui-icon" style="color:#ffffff;"></span>'+
+                                '<div style="display: inline-block;">'+table_data_1.content[i]+'</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</foreignObject>'+
+                '</g>'+
+            '</g>';
+        }
+        // console.log(table_1_td_all);
+        return table_1_td_all;
+    }
+</script>
+
+
+</body>
+</html>

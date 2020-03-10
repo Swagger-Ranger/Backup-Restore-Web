@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>中国外运综合分析平台</title>
+</head>
+<link href="plugins/bootstrap/bootstrap3/335/bootstrap.min.css" rel="stylesheet" />
+<link rel="shortcut icon" type="image/x-icon" href="logo.svg">
+<link rel="stylesheet" href="static/css/font-awesome.min.css">
+<script src="static/js/jquery.min.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="static/js/common.js"></script>
+
+
+<script src="plugins/bootstrap/bootstrap3/335/bootstrap.min.js"></script>
+<link href="plugins/nthtabs/jquery.scrollbar.min.css" rel="stylesheet">
+<script src="plugins/nthtabs/jquery.scrollbar.min.js" ></script>
+<link rel="stylesheet" href="./static/lib/nthtabs/nth.tabs.css">
+<script src="./static/lib/nthtabs/nth.tabs.js"></script>
+
+<!--scrollbar-->
+<script src="plugins/jquery.mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" href="plugins/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+<link rel="stylesheet" href="./static/css/sidebar.css">
+<script src="./static/js/sidebar.js"></script>
+
+<!--iconfont-->
+<link rel="stylesheet" href="./static/lib/iconfont/iconfont.css">
+<link rel="stylesheet" href="static/css/index.css">
+
+
+<!--页面加载start-->
+<link rel="stylesheet" href="static/css/loader.min.css">
+
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+    <div class="load_title">加载中...<br><span>...</span></div>
+</div>
+
+<body>
+	<div style="display: none;">
+		<iframe id="biee" src="http://www.baidu.com"></iframe>
+	</div>
+    <div id="rrapp" v-cloak>
+    <div class="side-bar" >
+        <div class="brand">
+            <div class="brand-icon"><img style="width:190px;height: 50px;" src="static/img/navigate_logo2.svg" alt=""></div>
+            <div class="brand-desc">&nbsp;</div>
+            <div class="brand-nav"><a href="#" class="roll-nav roll-nav-icon"><span class="fa fa-navicon"></span></a></div>
+        </div>
+        <div class="content">
+            <div class="btn-prev content-btn" title="向上滚动"><i class="fa fa-chevron-up"></i></div>
+            <div class="btn-next content-btn" title="向下滚动"><i class="fa fa-chevron-down"></i></div>
+            <div class="menus">
+                <ul class="menu-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+
+        <div id="user-bar">
+            <div id="system-name">
+                <!--数据中心-->
+                
+            </div>
+            
+            <div id="user-info">
+                <div class="dropdown">
+                    <div type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="user-name">
+                        <i class="fa fa-cog"></i></div>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li style="display: block;"><a href="javascript:;" @click="updatePassword"><i class="fa fa-cog"></i> 修改密码</a></li>
+                        <li style="display: block;"><a href="#"><i class="fa fa-folder-open-o"></i> 默认打开</a></li>
+                        <li><a a href="javascript:;" @click="logout"><i class="fa fa-power-off"></i> 退出登陆</a></li>
+                    </ul>
+                </div>
+                <!--        <div class="user-img"><img src="./static/img/user.jpg" alt=""></div>-->
+            </div>
+
+            <div id="user-name">
+                <span id="clock"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{user.nickname}}&nbsp;&nbsp;<span id="goodmorning">下午好</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+        </div>
+        <div id="nth-tabs" class="nth-tabs">
+        </div>
+    </div>
+
+    <!-- 修改密码 -->
+<div id="passwordLayer" style="display: none;">
+    <form class="form-horizontal">
+    <div class="form-group">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">账号</div>
+            <span class="label label-success" style="vertical-align: bottom;">{{user.username}}</span>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">原密码</div>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" v-model="form.password" placeholder="原密码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">新密码</div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" v-model="form.newPassword" placeholder="新密码"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+</body>
+
+
+<script src="static/js/vue.min.js"></script>
+<script src="static/js/router.js"></script>
+<script src="static/js/index.js"></script>
+</html>

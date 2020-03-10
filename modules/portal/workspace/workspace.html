@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>工作台</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../plugins/ztree/css/metroStyle/metroStyle.css">
+
+    <link rel="stylesheet" href="workspace.css">
+</head>
+
+<body>
+    <div class="ant-pro-grid-content">
+        <div class="ant-pro-page-header-wrap-children-content">
+            <div class="ant-row" style="margin-left: -12px; margin-right: -12px;">
+                <div class="ant-col-xl-16 col-md-8" style="padding-left: 12px; padding-right: 12px;">
+                    <div class="ant-card antd-pro-pages-dashboard-workplace-style-projectList ant-card-contain-grid" style="margin-bottom: 24px;">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                                <div class="ant-card-head-title">我的待办</div>
+                                <div class="ant-card-extra"><a onclick="change(this)" href="javascript:void(0)">收起</a></div>
+                            </div>
+                        </div>
+                        <div class="ant-card-body" id="todo" style="padding: 0px;height:286px;">
+                            
+                        </div>
+                    </div>
+
+                    
+                    
+                </div>
+                <div class="ant-col-xl-8 col-md-4" style="padding-left: 12px; padding-right: 12px;">
+                    <div class="ant-card" style="margin-bottom: 24px;">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                                <div class="ant-card-head-title">快速开始 / 便捷导航<span style="padding-left:20px;font-weight:bold;">...</span></div>
+                                <div class="ant-card-extra">
+                                    <a onclick="addMenu(this)" href="javascript:void(0)">添加</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ant-card-body" style="padding-top: 12px; padding-bottom: 12px;height: 286px;"><div class="antd-pro-pages-dashboard-workplace-style-members">
+                        <div id="favorite" class="ant-row" style="margin-left: -24px; margin-right: -24px;">
+                        </div>
+                        </div></div>
+                    </div>
+                    
+                    <div class="ant-card" style="margin-bottom: 24px;">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                                <div class="ant-card-head-title">我的足迹 / 访问历史</div>
+                                <div class="ant-card-extra">
+                                    <a onclick="delfsAll(this)" href="javascript:void(0)">清空</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ant-card-body" style="padding-top: 12px; padding-bottom: 12px;height: 286px;">
+                            <div class="antd-pro-pages-dashboard-workplace-style-members">
+                                <div id="his" class="ant-row" style="margin-left: -24px; margin-right: -24px;">
+                            
+
+                        </div>
+                    </div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 添加收藏 -->
+<div id="UserDataLayer" style="display: none;padding:10px;" v-cloak>
+    <div id="rrapp1">
+        <div style="margin-bottom: 5px;"><a class="btn btn-primary" onClick="saveFavoritesMenu()"><i class="fa fa-arrow-right"></i>&nbsp;确定</a>
+            <a class="btn btn-warning" onClick="layer.closeAll()"><i class="fa fa-times"></i>&nbsp;取消</a>
+                        </div>
+        <div v-show="!showList" class="panel panel-default" style="height: 350px;padding:5px;">
+            <form class="form-horizontal w_p_100">
+                <div class="tab-content" id="dataTree">
+                    <!-- <div class="tab-pane fade in active" id="menuTreeTab">
+                        
+                        <div style=" margin:4px 0; border-bottom: 1px #ccc dashed;"></div>
+                    </div> -->
+                    <div class="col-sm-6"><span  style="font-weight: 600;">可收藏：</span>
+                          <ul id="menuTree" class="ztree tree-div"></ul>
+                        </div>
+                        <div class="col-sm-6">
+                        
+                        <span style="font-weight: 600;display">已收藏：</span>
+                          <ul id="menuAuthTree" class="ztree tree-div"></ul>
+                        </div>
+                        
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../../../static/js/jquery.min.js"></script>
+<script src="../../../plugins/layer/layer.js"></script>
+<script src="../../../static/js/vue.min.js"></script>
+<script src="../../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../../static/js/base.js"></script>
+<script src="workspace.js"></script>
+
+<script type="text/javascript">
+function change(obj){
+    if($(obj).parent().parent().parent().next().hasClass("dn")){
+        $(obj).text("收起");
+        $(obj).parent().parent().parent().next().removeClass("dn");
+    }else{
+        $(obj).text("展开");
+        $(obj).parent().parent().parent().next().addClass("dn");
+    }
+}
+
+// loadTodo("todo","todo");
+loadMenu("favorite","queryFavoritesMenu");
+loadMenu("history","queryBrowsingHistory");
+
+function loadTodo(id,func){
+    $.ajax({
+        type: "GET",
+        url: portalURL + "sys/workspace/"+func,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(r){
+            var str = "";   
+            $.each(r.list,function(i,item){  //遍历二维数组
+                str+='<div title="查看明细" data-url='+item.url+' data-menuname='+item.menuname+' class="todo-card ant-card-grid antd-pro-pages-dashboard-workplace-style-projectGrid">'+
+                    '<div class="ant-card">'+
+                        '<div class="ant-card-body" style="padding: 0px;">'+
+                            '<div class="ant-card-meta">'+
+                                '<div class="ant-card-meta-detail">'+
+                                    '<div class="ant-card-meta-title">'+
+                                        '<div class="antd-pro-pages-dashboard-workplace-style-cardTitle"><span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image"><img src="../../static/img/未提交.png"></span><a href="javascript:void(0)">'+item.typename+'</a></div>'+
+                                    '</div>'+
+                                    '<div class="ant-card-meta-description">'+item.prev+'<span>'+item.total+'</span>'+item.next+'</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+            });
+
+            for(var i=0;i<6-r.list.length;i++){
+                str+='<div class=" ant-card-grid antd-pro-pages-dashboard-workplace-style-projectGrid">'+
+                    '<div class="ant-card">'+
+                        '<div class="ant-card-body" style="padding: 0px;">'+
+                            '<div class="ant-card-meta">'+
+                                '<div class="ant-card-meta-detail">'+
+                                    '<div class="ant-card-meta-title">'+
+                                        '<div class="antd-pro-pages-dashboard-workplace-style-cardTitle"><span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image"></span><a href="javascript:void(0)"></a></div>'+
+                                    '</div>'+
+                                    '<div class="ant-card-meta-description"><span></span></div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+            }
+
+
+            $("#"+id).html(str);
+            //绑定点击事件。
+            $('.todo-card').on('click',function() {
+                var url = $(this).data('url');
+                var name = $(this).data('menuname');
+                var menuId=getUUID();
+                if(url){
+                    parent.window.nthTabs.addTab({
+                        id: menuId,
+                        title: name,
+                        content: getContent(url),
+                    }).setActTab('#' + menuId);
+                }
+            }); 
+        }
+    });
+}
+
+/*
+ * 加载菜单
+ */
+function loadMenu(id,func){
+    $.ajax({
+        type: "POST",
+        url: portalURL + "sys/menulog/"+func,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(r){
+            var str = "";   
+            $.each(r.page.list,function(i,item){  //遍历二维数组
+                if(item.type!='0'){//过滤掉是目录的菜单
+                str+='<div class="ant-col ant-col-12 header_font" style="padding-left:24px;padding-right: 24px;">';
+                str+='<a data-url="' + item.url + '" data-id="' + item.menuId + '" data-parent=' + item.parentId + ' href="javascript:void(0)"><span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image">';
+                // str+='<img src="'+item.icon+'">';
+                str+='<i class="'+item.icon+'"></i>';
+                str+='</span><span class="antd-pro-pages-dashboard-workplace-style-member">'+ item.name + '</span></a></div>';
+                }
+            });
+
+            $("#"+id).html(str);
+            //绑定点击事件。
+            $('.header_font').on('click','a',function() {
+                 var menuId = $(this).data('id');
+                var url = $(this).data('url');
+                var parentId = $(this).data('parent');
+                var name = $(this).text();
+                if(url){
+                //  先暂时定位这个范围内的菜单以新窗口的方式打开，后面改成配置型
+                    if(parentId == 20001||parentId == 20002){
+                        window.open(url);
+                        return;
+                    }
+                    parent.window.nthTabs.addTab({
+                        id: menuId,
+                        title: name,
+                        content: getContent(url),
+                    }).setActTab('#' + menuId);
+                }
+            }); 
+        }
+    });
+}
+
+function addMenu(obj){
+    vm.getMenu();
+    openLayer("#UserDataLayer");
+}
+
+</script>
+</body>
+
+</html>

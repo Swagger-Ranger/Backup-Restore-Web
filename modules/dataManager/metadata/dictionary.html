@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="">
+        <title>字典管理</title>
+        <!--[if IE 6]>
+        <script src="script/iepng.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+        <link href="../../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.css"  rel="stylesheet">
+        <link rel="stylesheet" href="../../../plugins/ztree/css/metroStyle/metroStyle.css">
+        <link rel="stylesheet" href="../../../static/css/custom.css">
+        <link href="../../../plugins/nthtabs/jquery.scrollbar.min.css" rel="stylesheet">
+        <link href="../../../static/lib/nthtabs/nth.tabs.css" rel="stylesheet" >
+        <link href="../../../plugins/select2/css/select2.min.css" rel="stylesheet">
+        <style type="text/css">
+          html{
+          	overflow-y:auto;
+          }
+          .colStyle {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          table{
+            table-layout:fixed;
+          }
+          .bootstrap-table .JCLRgrip.JCLRLastGrip {
+            display: none;
+          }
+          .yell{
+            background-color: #FDD100;
+          }
+          table td{
+
+            overflow: hidden;
+
+            text-overflow:ellipsis;
+
+            white-space: nowrap;
+
+        }
+        </style>
+        
+    
+    </head>
+    <body>
+        <div id="table_toolbar" class="fixed-table-toolbar" style="float:left;width:100%">
+        
+        <div id="func_box" class="bars pull-left">
+            <div id="funcBtn" class="btn-group" >
+                    <button id="procedure" func_nm="下载" func_type="procedureDate" dtl_tbl_url="null" class="funcBtn btn btn-default" onclick="updateTable()"><span class="glyphicon glyphicon-cloud-download" ></span>&nbsp;下载</button>
+            </div>
+        </div>
+        <!-- 查询条件 -->
+        <div id="slt_box" class="bars pull-right">
+            <div id="searchBtn" class="btn-group">
+                <div style="margin-right:5px;margin-top:0px;margin-bottom:0px;position:relative;" class="pull-left search ">
+                    <div style="float: left;line-height: 30px" >系统名称:</div>
+                    <div style="float:left; width:50%;">
+                        <div style="width:100%;">
+                        <input id="txtTreeSelect"  type="text" onclick="showMenu(); return false;"
+                            class="form-control form-datetimepicker date-length1" readonly="readonly"/>
+                        <input id="idTreeSelect" type="hidden">
+                        <input id="pidTreeSelect" type="hidden">
+                        </div>
+                        <div id="menuContent"  style="display: none;position: absolute;z-index: 10;background: #f9f9f9;margin-left: -985px;margin-top: -10px;height: 200px;overflow-y:auto;">
+                            <ul id="treeDemo" class="ztree" style="margin-top: 0; width: width:40%;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-right:55px;margin-top:0px;margin-bottom:0px" class="pull-left search ">
+                    <a class="btn btn-primary" onclick="select()"><i class="fa fa-plus"></i>&nbsp;查询</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        <div id="reportTableDiv1"  style="width:100%;background-color:#FFFFFF;margin-top: 8px;height:calc(100% - 100px);">
+            <table id="reportTable" style="width:100%;padding-right: 0px;"  class="table text-nowrap">
+                    
+            </table>        
+        </div>
+
+    <!-- /jquery/1.11.3/jquery.min.js -->
+    <script src="../../../static/js/jquery.min.js"></script>
+    <script src="../../../plugins/layer/layer.js"></script>
+    <script src="../../../static/js/bootstrap.min.js"></script>
+    <script src="../../../static/js/vue.min.js"></script>
+    <!-- bootstrap-table -->
+    <script src="../../../plugins/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../../plugins/bootstrap/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="../../../plugins/bootstrap/bootstrap-table/extensions/export/core/tableExport.min.js"></script>
+    <script src="../../../plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../../plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- bootstrap-datetimepicker -->
+    <script src="../../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../../plugins/nthtabs/jquery.scrollbar.min.js" ></script>
+    <script src="../../../static/lib/nthtabs/nth.tabs.js"></script>
+    <script src="../../../static/js/common_bootstraptable.js"></script>
+    <script src="../../../static/js/commonUtil-2.0.js"></script>
+    <script src="../../../plugins/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../../plugins/select2/js/select2.min.js"></script>
+    <script src="../../../static/js/commonGobalValue.js"></script>
+    <script type="text/javascript" src="script/dictionary.js"></script>
+  </body>
+</html>
+
+<script type="text/javascript">
+
+
+  
+</script>

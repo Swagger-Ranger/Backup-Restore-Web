@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>海捷科技数据补录平台</title>
+    <link href="plugins/bootstrap/bootstrap3/335/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="logo.svg">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<script src="static/js/jquery.min.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="static/js/common.js"></script>
+  
+<script src="plugins/bootstrap/bootstrap3/335/bootstrap.min.js"></script>
+<link href="plugins/nthtabs/jquery.scrollbar.min.css" rel="stylesheet">
+<script src="plugins/nthtabs/jquery.scrollbar.min.js" ></script>
+<link rel="stylesheet" href="./static/lib/nthtabs/nth.tabs.css">
+<script src="./static/lib/nthtabs/nth.tabs.js"></script>
+
+<!--scrollbar-->
+<script src="plugins/jquery.mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" href="plugins/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+<link rel="stylesheet" href="./static/css/sidebar-btjt.css">
+<script src="./static/js/sidebar.js"></script>
+
+<!--iconfont-->
+<link rel="stylesheet" href="./static/lib/iconfont/iconfont.css">
+<link rel="stylesheet" href="static/css/index-btjt.css">
+
+
+<!--页面加载start-->
+<link rel="stylesheet" href="static/css/loader.min.css">
+
+<style type="text/css">
+    #loader:after {
+     border-top-color: #00284d;
+}
+
+</style>
+<div id="loader-wrapper">
+    <div id="loader" style="border-top-color:#00284d"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+    <div class="load_title">加载中...<br><span>...</span></div>
+</div>
+
+<body>
+
+    <div id="rrapp" v-cloak>
+    <div class="side-bar" >
+        <div class="brand">
+            <div class="brand-icon"><img style="width:35.375px;height: 45px;padding:2px;margin-top: 4px" src="static/img/logo-highjet.png" alt="">
+                <span></span></div>
+            <div class="brand-desc">数据填报系统</div>
+            <div class="brand-nav" title="收缩/展开"><a href="#" class="roll-nav roll-nav-icon"><span><img class='shrink' src='static/img/dedent.png' style='width:20px;height: 20px;'></span></a></div>
+        </div>
+        <div class="content">
+            <div class="btn-prev content-btn" title="向上滚动"><i class="fa fa-chevron-up"></i></div>
+            <div class="btn-next content-btn" title="向下滚动"><i class="fa fa-chevron-down"></i></div>
+            <div class="menus">
+                <ul class="menu-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+
+        <div id="user-bar">
+            <div id="system-name">
+                <!--数据中心-->
+            </div>
+            
+            <div id="user-info">
+                <div class="dropdown">
+                    <div type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="user-name">
+                        <i class="fa fa-cog"></i></div>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li class="db"><a href="javascript:;" @click="updatePassword"><i class="fa fa-cog"></i> 修改密码</a></li>
+                        <li class="dn"><a href="#"><i class="fa fa-folder-open-o"></i> 默认打开</a></li>
+                        <li><a a href="javascript:;" @click="logout"><i class="fa fa-power-off"></i> 退出登录</a></li>
+                    </ul>
+                </div>
+                <div class="user-img"></div>
+            </div>
+
+            <div id="user-name">
+                 <span id="sysUserOrg" style="display: none">{{user.orgNm}}</span>
+                <span id="clock"></span>
+                <span id="user-nickname">{{user.nickname}}</span>，
+                <span id="goodmorning">下午好</span>
+                <span id="btnHelp" class="c-p">
+                    <a :href='user.docUrl' :download="user.docName"><i id="help" class="fa fa-question-circle"></i></a>
+                </span>
+                <span id="btnNotice" class="c-p">
+                <i class="fa fa-bell-o"></i><span clas="bell"><sup class="ant-badge-count" id="count"></sup></span>
+                </span>
+            </div>
+        </div>
+        <div id="nth-tabs" class="nth-tabs">
+        </div>
+    </div>
+
+    <!-- 修改密码 -->
+<div id="passwordLayer" class="dn">
+    <form class="form-horizontal">
+    <div class="form-group">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">账号</div>
+            <div style="padding-top:5px;"><span style="margin-left:15px;" class="label label-success va-b">{{user.username}}</span></div>
+            
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">原密码</div>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" v-model="form.password" placeholder="原密码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">新密码</div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" v-model="form.newPassword" placeholder="新密码"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+</div>
+
+
+</body>
+
+
+<script src="static/js/vue.min.js"></script>
+<script src="static/js/router.js"></script>
+<script src="static/js/boss-index.js"></script>
+
+</html>

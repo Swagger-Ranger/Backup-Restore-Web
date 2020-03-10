@@ -1,0 +1,175 @@
+.rptDataTable{
+	width:100%
+}
+.bootstrap-table td{
+	padding: 0px!important;
+}
+.bootstrap-table td.bs-checkbox{
+	padding: 8px!important;
+}
+.bootstrap-table td .form-control{
+	border-radius: 0px!important;
+	color: #403f3f;
+	background: transparent;
+/* 	border: 0px solid #ccc!important; */
+}
+.bootstrap-table td .control-label{    
+	color: #403f3f;
+    margin-top: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-break:keep-all;
+}
+.bootstrap-table td .control-a{
+    margin-top: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-break:keep-all;
+	display:inline-block;
+	cursor: pointer;
+}
+.bootstrap-table td .control-tab{
+    margin-top: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-break:keep-all;
+	display:inline-block;
+	cursor: pointer;
+}
+.bootstrap-table td .editable{
+    padding-left: 10px;
+    line-height: 2.4;
+	font-weight: bold;
+}
+.bootstrap-table .actImportPlug{
+	display: none;
+}
+.bootstrap-table .showImportText{
+    color: #2e6798!important;
+	cursor: pointer;
+}
+.bootstrap-table .noValueText{
+    color: #ddd!important;
+	cursor: pointer;
+}
+.bootstrap-table .showImportText:focus, .bootstrap-table .showImportText::hover,
+/* .bootstrap-table .isSelect:focus, .bootstrap-table .isSelect::hover, */
+.bootstrap-table .form-datetimepicker:focus, .bootstrap-table .form-datetimepicker::hover{
+    color: #23527c;
+}
+.bootstrap-table .fixed-table-container .isSelect,
+.bootstrap-table .fixed-table-container .form-datetimepicker{
+    cursor: pointer;
+	background: transparent;
+}
+.bootstrap-table .fixed-table-container .form-datetimepicker,.bootstrap-table .isSelect{
+	border: none!important;
+    color: #2e6798!important;
+}
+.bootstrap-table .fixed-table-container .isSelect option{
+	color: #403f3f!important;
+}
+.bootstrap-table td label{
+	font-weight: 400!important;
+}
+.bootstrap-table .fixed-table-container .isMultiSelect .btn.dropdown-toggle{
+ /*    background: none;  */
+	background: transparent;
+    border: none;
+} 
+.bootstrap-table .fixed-table-container .isMultiSelect .btn.dropdown-toggle span.filter-option{
+	color: #2e6798!important;
+}
+.table {
+	table-layout:fixed;
+}
+.table td span.control-label{
+	word-break:break-all;
+	word-wrap:break-word;
+}
+/*锟斤拷锟斤拷锟斤拷锟绞�*/
+.my_topModule
+{	
+	width: 100%;
+	height: 45px;
+    margin-top: 5px;
+	border-bottom: 1px solid #DDDDDD;
+}
+#rptTipHtml{
+	color: #ed413e;
+    font-size: 16px;
+    line-height: 2.5;
+    font-family: "Microsoft YaHei";
+}
+#rptTipHtml img{
+	width: 23px;
+    margin-bottom: 6px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.2857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+/*.fixed-table-container thead ,th{
+    background-color: #E3E7E8 !important;
+}*/
+
+/*.th-inner {
+	background-color: #E3E7E8 !important;
+}*/
+
+.mb5{margin-bottom: 5px;}
+.pb5{margin-bottom: 5px;}
+
+.height39{
+	height: 39px;
+}
+
+.mb0{margin-bottom: 0;}
+
+.height34{height: 34px;}
+.height28{height: 28px;}
+
+.dashed-line{border-bottom: 1px dashed #ddd;}
+.dashed-line-t{border-top: 1px dashed #ddd;}
+
+.pdl20{ padding-left: 20px; }
+.pdl32{ padding-left: 32px; }
+.red{color:#f11deb; }
+.green{color:#33cc34;}
+.blue{color:#00beb7;}
+
+.modal-body {
+    padding: 10px;
+}
+
+.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner{
+	padding:4px;
+}
+.pull-left {
+	float: left !important;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}

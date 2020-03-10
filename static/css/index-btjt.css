@@ -1,0 +1,91 @@
+body {
+        margin: 0;
+        font-family: 'Microsoft YaHei';
+        line-height: normal;
+        /*background: #fff url(../img/bg_body.jpg) repeat;*/
+    }
+
+    #content {
+        padding-left: 255px;
+        /*transition: 0.3s;*/
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    #nth-tabs {
+        width:100%;
+        height: calc(100% - 50px);
+    }
+
+    #user-bar{
+        width:100%;
+        height:50px;
+        line-height:50px;
+/*        border-bottom:1px solid lightgray;*/
+    }
+    
+    #system-name {
+        float:left;
+        margin-left:50px;
+        font-size: 20px;
+        font-weight: bold;
+        color:#313452;
+        /*cursor: pointer;*/
+    }
+    #user-name {
+        float:right;
+    }
+
+    #user-info {
+/*        display: none;*/
+        float:right;
+        margin-right:20px;
+        cursor: pointer;
+    }
+
+    #user-info .user-name {
+        color: dimgray;
+        padding-left: 6px;
+    }
+
+    #user-info .dropdown-menu {
+        min-width: 0;
+        left: -90px;
+    }
+
+    #user-info .dropdown-menu a {
+        color: dimgray;
+    }
+
+    .form-horizontal .form-group{
+        margin-left:0px;
+        margin-right:0px;
+    }
+
+    body .demo-class .layui-layer-title{background:#E94F25;color:#fff; }
+
+    .ant-badge-count {
+    z-index: 10;
+    min-width: 20px;
+    height: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-align: center;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 1px;
+    padding: 0px 6px;
+    background: rgb(245, 34, 45);
+    border-radius: 10px;
+}
+
+.c-p{cursor: pointer;}
+
+#btnHelp{width:40px;padding:10px;}
+#clock{margin-right: 20px;}
+.bell{color:red;font-weight: bold;margin-top:-3px;margin-right: 5px;}
+.dn{display: none;}
+.db{display: block;}
+.va-b{vertical-align: bottom;}

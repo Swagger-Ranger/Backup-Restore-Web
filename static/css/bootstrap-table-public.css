@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.panel {
+	margin-bottom: 1px;
+}
+
+.panel-body {
+	padding-top: 5px;
+}
+
+.btn-danger {
+	background-color: #ff6c60;
+	border-color: #ff6c60;
+	color: #FFFFFF;
+}
+
+.modal-header {
+	background: #54b6d1;
+	color: #fff;
+	border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-bottom: none;
+}
+.col-md-offset-4 {
+    margin-left: 70%;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.css">
+<link href="../../../plugins/select2/css/select2.min.css" rel="stylesheet">
+
+
+<link type="text/css" rel="stylesheet" href="../../../modules/dataManager/metadata/css/table.css" />
+<link type="text/css" rel="stylesheet" href="../../../modules/dataManager/metadata/css/bankAccountDtl.css" />
+<script src="../../../static/js/jquery.min.js"></script>
+<script src="../../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../../../static/js/vue.min.js"></script>
+<script src="../../../static/js/bootstrap.min.js"></script>
+<script src="../../../static/js/common.js"></script>
+<script src="../../../plugins/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../../plugins/select2/js/select2.min.js"></script>
+<script src="../../../static/js/commonGobalValue.js"></script>
+<script type="text/javascript" src="script/fieldSubs.js"></script> 
+
+<style type="text/css">
+          html{
+          	overflow-y:auto;
+          }
+          .colStyle {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          table{
+            table-layout:fixed;
+          }
+          .bootstrap-table .JCLRgrip.JCLRLastGrip {
+            display: none;
+          }
+          .yell{
+            background-color: #FDD100;
+          }
+          table td{
+
+            overflow: hidden;
+
+            text-overflow:ellipsis;
+
+            white-space: nowrap;
+
+        }
+        </style>
+</head>
+
+<body>
+	<div id="tt" class="fixed-table-toolbar">
+		<div id="searchContainer" class="container pull-left"
+			style="width: 100%; margin-top: 10px;">
+			<div class="row">
+				<div id="prjIdSelDiv" class="col-sm-6 col-xs-6" style="">
+					<label for="" class="control-label pull-left text-right" style="width: 45%">表名：</label>
+					<span id="prjNmText" class="form-control pull-left noborderClass" style="width: 55%"></span>
+				</div >
+				<div class="col-sm-6 col-xs-6">
+					<label for="" class="control-label pull-left text-right" style="width: 45%">表描述：</label>
+					<span id="productCodeText" class="form-control pull-left noborderClass" style="width: 55%"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<label for="" class="control-label pull-left text-right" style="width:45%;">用户/库：</label>
+					<span style="width: 55%" id="kuaijiText" class="form-control pull-left noborderClass"></span>
+				</div>
+				<div class="col-sm-6 col-xs-6">
+					<label for="" class="control-label pull-left text-right" style="width: 45%">
+					表主键：</label>
+					<span style="width: 55%" id="chunaText" class="form-control pull-left noborderClass"></span>
+					<span id="sysId" class="form-control pull-left noborderClass" style="display:none"></span>
+				</div>
+			</div>
+		</div>
+		<!-- 自定义工具栏 -->
+		<div id="table_toolbar" class="fixed-table-toolbar" style="float:left;width:100%">
+			<div id="func_box" class="bars pull-left">
+				<div id="funcBtn" class="btn-group" >
+					<button id="refresh" func_nm="刷新" func_type="refresh" dtl_tbl_url="null" class="funcBtn btn btn-default" onclick="refreshTable()"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;刷新</button>
+					<button id="export" func_nm="导出" func_type="export" dtl_tbl_url="null" class="funcBtn btn btn-default" onclick="ExportTable()"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;导出</button>
+				</div>
+			</div>
+			<!-- 查询条件 -->
+			<div id="slt_box" class="bars pull-right">
+				<div id="searchBtn" class="btn-group">
+					<div style="margin-right: 5px;margin-top:0px;margin-bottom:0px" class="pull-left search"><div style="margin-top:0px;margin-bottom:5px" class="pull-left search">字段：</div><input id="fldId" type="text"  style="width:100px" class="pull-left form-control date-length1 search-field"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 列表内容 -->
+	<div id="reportTableDiv1"  style="width:100%;background-color:#FFFFFF;margin-top: 8px;height:calc(100% - 200px);">
+            <table id="reportTable" style="width:100%;padding-right: 0px;"  class="table text-nowrap">
+                    
+            </table>        
+        </div>
+
+</body>
+</html>

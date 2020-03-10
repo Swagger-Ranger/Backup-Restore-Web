@@ -1,0 +1,17 @@
+6e87 0200 ac86 0200 0100 0200 0000 0000
+.menu-item{
+    width:200px;
+    height:43px;
+    background:#2B2B43;
+    color:#D0D0F4;
+    line-height:43px;
+}
+.menu-item::after{
+    content:'';
+    display:table;
+    clear:both;
+}
+
+.menu-item > div{
+    float:left;
+}

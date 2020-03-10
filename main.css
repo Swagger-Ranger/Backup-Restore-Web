@@ -1,0 +1,61 @@
+html,body{
+	width: 100%
+}
+.login-page{
+	background: #ffffff url(./img/bg2.jpg) center no-repeat !important;
+
+}
+.rapper{
+	
+	position: absolute;
+	width: 100%;
+	top:250px;
+}
+.rail{
+	background: #ffffff url(./img/bg3.png) no-repeat;
+	height: 150px;
+	width: 100%;
+	overflow: hidden;
+  	background-size:cover;
+}
+.logo{
+	display: inline-block;
+	width: 350px;
+	height: 70px;
+	background:url(./img/logo.png) center/100% 100% no-repeat;
+	position: relative;
+	top: 50px;
+	left: 170px;
+}
+.text_cell{
+	display: inline-block;
+	flex-direction: column;
+	justify-content: center;
+}
+
+
+.login-box-body{
+	background: #ffffff url(./img/bg.png) center no-repeat;
+	position: absolute;
+	right: 350px;
+	top:180px;
+	width: 350px;
+	height: 270px;
+	z-index: 100;
+	float: right; 
+	border-radius: 5px;
+	box-shadow: 2px 1px 1px 1px grey;
+
+}
+.login-box-msg{
+	padding: 0px 20px 20px 0px;
+	text-align: left;
+}
+.forget_password{
+	position: relative;
+	top: 10px;
+}
+button{
+	margin-top: 20px;
+	background-color: #1179d6 !important;
+}

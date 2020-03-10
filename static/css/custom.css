@@ -1,0 +1,159 @@
+/*修正图标和样式*/
+body{
+	/*padding:0px 5px 0px 5px;*/
+}
+.columns > button{
+	width: 52px;
+   	height: 34px;
+}
+p[class="help-block"]{
+	margin-bottom:0;
+}
+#rrapp{
+	padding: 5px;
+}
+form > .modal-body{
+	padding-bottom:0;
+	max-height:400px;
+	overflow:auto;
+}
+.dn{display: none;}
+.selectC{width:120px;}
+.w90px{width:90px;}
+.modal-footer{
+	 text-align: center;
+}
+ul li{
+	list-style-type:none;
+}
+ul {
+	padding-left: 20px;
+}
+.pointer{cursor: pointer;}
+.search-radio{
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    line-height: 34px;
+}
+.search-radio input[type=radio]{
+    margin-top: 10px;
+}
+.btn-group .btn{
+/*     border-radius: 0px; */
+}
+.modal-content{
+    background-color: #f4f4f4!important;
+}
+.actValSave{
+	display: none;
+}
+.showImportText{    
+	color: #2e6798!important;
+    cursor: pointer;
+/* 	width: 100px; */
+}
+.seqNbrInp{
+	width: 100px;
+}
+.dspNmInp{
+	width: 200px;
+}
+.isTextarea{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
+}
+.dyiBtnZtree:HOVER {
+	opacity:0.6;
+}
+.mainPageTreeBody{
+	height: 400px; 
+	overflow-y: scroll;
+}
+
+.search .form-datetimepicker{
+    background-color: #fff;
+}
+.search .form-datetimepicker.date-length1{
+	width: 105px;
+}
+.search .form-datetimepicker.date-length2{
+	width: 125px;
+}
+.search .form-datetimepicker.date-length3{
+	width: 150px;
+}
+.search .form-datetimepicker.date-length4{
+	width: 175px;
+}
+.search .form-datetimepicker.date-length5{
+	width: 200px;
+}
+.viewModalSplitDiv{
+	float: left;
+	width: 2%;
+	height: 1px;
+}
+.viewModalPartDiv{
+	float: left;
+	width: 32%;
+}
+#menuTreeOutDiv,#orgTreeOutDiv{
+	height: 390px;
+}
+#menuTreeDiv,#dataTreeDiv{
+	height: 340px;
+}
+.viewModalDivBoder{
+	border: 1px solid #DDDDDD;
+	-webkit-border-radius: 4px;
+}
+.viewModalPartTitle{
+    padding: 8px;
+    line-height: 24px;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.checkbox_false_part_myself{
+	background-position: 0 -28px!important;
+}
+.form-datetimepicker{
+	cursor: pointer;
+}
+.split-line{
+	height: 1px;
+	border: 1px solid #DDDDDD;
+}
+#searchContainer label.control-label{
+	width: 45%;
+	line-height: 2.1;
+}
+#searchContainer .form-control{
+	width: 55%;
+}
+#searchContainer > .row > div{
+	margin-bottom: 5px;
+}
+#searchContainer .radio-inline{
+	margin-top: 3px;
+}
+.clickClass,.radio input[type="radio"]{
+	cursor: pointer;
+}
+.datePickerClass[readonly]{
+	background-color: rgba(0,0,0,0)!important;
+}
+
+.m-l-r-5{margin-left:5px;margin-right: 5px;}
+.page-list .btn{padding:3px 6px;}
+.page-list .dropdown-menu{min-width:50px;}
+.bootstrap-table .table>thead>tr>th {
+    /*background-color: #E2E2E2;*/
+}
+.m-b-5{margin-bottom: 5px;}
+.m-t-5{margin-top: 5px;}

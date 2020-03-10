@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="metadata/css/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="metadata/css/base.css">
+  <link rel="stylesheet" href="metadata/css/index.css" />
+	<script type="text/javascript" src="metadata/script/lib/jquery.min.js" ></script>
+	<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+	<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="../../static/js/common.js"></script>
+	<script src="../../static/js/commonUtil.js"></script>
+	<script type="text/javascript" src="../../static/js/commonGobalValue.js"></script>
+</head>
+<body>
+  <div id="app">
+		<el-form :inline="true" :model="formInline" class="demo-form-inline" size="small">
+		  <el-form-item label="源系统名">
+		    <el-input v-model="formInline.hdssysCname" placeholder="源系统名"></el-input>
+		  </el-form-item>
+		  <el-form-item label="源系统表名">
+		    <el-input v-model="formInline.sourceTablCname" placeholder="源系统表中文名"></el-input>
+		  </el-form-item>
+		   <el-form-item label="历史数据平台表名">
+		    <el-input v-model="formInline.hdsTableCname" placeholder="历史数据平表中文名"></el-input>
+		  </el-form-item>
+		  <el-form-item>
+		    <el-button type="primary" @click="getTableData" icon="el-icon-search">查询</el-button>
+		    <el-button type="primary" @click="addFile" icon="el-icon-plus">新增</el-button>
+		    <el-button type="primary" @click="editFile" icon="el-icon-edit-outline">修改</el-button>
+		    <el-button type="primary" @click="deleteSys" icon="el-icon-delete">删除</el-button>
+		  </el-form-item>
+		</el-form>
+		<!--表格-->
+		<el-table
+		ref=multipleTable
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      width="50">
+    </el-table-column>
+     <el-table-column
+      type="selection"
+      width="55">
+    </el-table-column>
+     <el-table-column
+      prop="mapperId"
+      label="id"
+      v-if="false"
+      width="0">
+    </el-table-column>
+    <el-table-column
+      prop="sourceSysCname"
+      label="源系统名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="sourceSysName"
+      label="源系统英文名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="sourceDBName"
+      label="源系统数据库名">
+    </el-table-column>
+    <el-table-column
+      prop="sourceTableCname"
+      label="源系统表中文名">
+    </el-table-column>
+    <el-table-column
+      prop="sourceTable"
+      label="源系统表英文名">
+    </el-table-column>
+    <el-table-column
+      prop="hdsDBName"
+      label="历史数据平台库名">
+    </el-table-column>
+    <el-table-column
+      prop="hdsTable"
+      label="历史数据平台表名">
+    </el-table-column>
+			<el-table-column
+					prop="hdsTableCname"
+					label="历史数据平台表中文名">
+			</el-table-column>
+			<el-table-column
+					prop="hdsSysName"
+					label="历史数据平台系统英文名">
+			</el-table-column>
+			<el-table-column
+					prop="hdsSysCname"
+					label="历史数据平台系统中文名">
+			</el-table-column>
+<!--    <el-table-column-->
+<!--      prop="createtime"-->
+<!--      label="创建时间">-->
+<!--    </el-table-column>-->
+  </el-table>
+  <!---->
+  <!--分页-->
+  <div class="pagingBox">
+  	<el-pagination
+		  @size-change="handleSizeChange"
+		  @current-change="handleCurrentChange"
+		  :current-page="currentPage"
+		  :page-sizes="pageSizes"
+		  :page-size="pageSize"
+		  layout="total, sizes, prev, pager, next, jumper"
+		  :total="total">
+		</el-pagination>
+  </div>
+  
+  <!---->
+  <!--对话框-->
+  <el-dialog :title="title" :visible.sync="dialogFormVisible" @close='closeDialog'>
+	  <el-form :model="form" :rules="rules" ref="form" size="small">
+	    <el-form-item label="归档系统与库名" prop="sourcesysId" :label-width="formLabelWidth">
+	    	<el-select v-model="form.sourcesysId" filterable placeholder="请选择">
+			    <el-option
+			      v-for="item in form.sourcesysOpiton"
+			      :key="item.value"
+			      :label="item.label"
+			      :value="item.value">
+			    </el-option>
+			  </el-select>
+	    </el-form-item>
+	    <el-form-item label="历史数据平台库名" prop="outsysId" :label-width="formLabelWidth">
+	    	<el-select v-model="form.outsysId" filterable placeholder="请选择">
+			    <el-option
+			      v-for="item in form.sourcesysOpiton"
+			      :key="item.value"
+			      :label="item.label"
+			      :value="item.value">
+			    </el-option>
+			  </el-select>
+	    </el-form-item>
+	    <el-form-item label="归档表中文名" prop="sourceTableCname" :label-width="formLabelWidth">
+	      <el-input v-model="form.sourceTableCname" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="归档表英文名" prop="sourceTable" :label-width="formLabelWidth">
+	      <el-input v-model="form.sourceTable" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="历史数据平台表中文名" prop="outTableCname" :label-width="formLabelWidth">
+	      <el-input v-model="form.outTableCname" autocomplete="off"></el-input>
+	    </el-form-item>
+	    <el-form-item label="历史数据平台表英文名" prop="outTable" :label-width="formLabelWidth">
+	      <el-input v-model="form.outTable" autocomplete="off"></el-input>
+	    </el-form-item>
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="cancle" size="small">取 消</el-button>
+	    <el-button type="primary" @click="sub" size="small">确 定</el-button>
+	  </div>
+	</el-dialog>
+<!---->
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="metadata/script/lib/vue.js" type="text/javascript" charset="utf-8"></script>
+  <!-- import JavaScript -->
+
+  <script src="metadata/script/lib/element-ui.js"></script>
+  <script src="metadata/script/backupTable.js"></script>
+</html>

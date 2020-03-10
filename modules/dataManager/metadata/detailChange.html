@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- jsp文件头和头部 -->
+<!-- <%@ include file="/WEB-INF/jsp/system/index/head2.jsp"%>
+	<%@ include file="/base/importFile/bootstrapTable.jsp"%> -->
+<script src="../../../static/js/bootstrapTable.js"></script>
+<!-- 	<link type="text/css" rel="stylesheet" href="../../modules/dataIpt/reportDialog.css"/> -->
+<!-- select2插件 -->
+<link href="../../../plugins/select2/css/select2.min.css" rel="stylesheet">
+<!--     <script src="../../plugins/select2/js/i18n/zh-CN.js"></script> -->
+<script src="../../../plugins/select2/js/select2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="../../modules/dataIpt/reportDialog.css"/>
+<link type="text/css" rel="stylesheet"
+	href="../../modules/dataIpt/iptRpt.css" />
+<!-- <link type="text/css" rel="stylesheet" href="../../static/css/checkbox.css" /> -->
+<link type="text/css" rel="stylesheet"
+	href="../../modules/dataIpt/bankAccountDtl.css" />
+	<script src="../../../plugins//bootstrap/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../../plugins//bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="script/detailChange.js"></script> 
+
+
+<style type="text/css">
+          html{
+          	overflow-y:auto;
+          }
+          .colStyle {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          table{
+            table-layout:fixed;
+          }
+          .bootstrap-table .JCLRgrip.JCLRLastGrip {
+            display: none;
+          }
+          .yell{
+            background-color: #FDD100;
+          }
+          table td{
+
+            overflow: hidden;
+
+            text-overflow:ellipsis;
+
+            white-space: nowrap;
+
+        }
+        </style>
+</head>
+
+<body>
+		<!-- 自定义工具栏 -->
+		<div id="table_toolbar" class="fixed-table-toolbar" style="float:left;width:100%;">
+			<div id="func_box" class="bars pull-left">
+				<div id="funcBtn" class="btn-group" >
+					<button id="refresh" func_nm="刷新" func_type="refresh" dtl_tbl_url="null" class="funcBtn btn btn-default" onclick="refreashTable()"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;刷新</button>
+					<button id="export" func_nm="导出" func_type="export" dtl_tbl_url="null" class="funcBtn btn btn-default" onclick="updateTable()"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;导出</button>
+				</div>
+			</div>
+			<!-- 查询条件 -->
+			<div id="slt_box" class="bars pull-right">
+				<div id="searchBtn" class="btn-group">
+					<div style="margin-right: 5px;margin-top:0px;margin-bottom:0px" class="pull-left search">
+						<div style="margin-top:0px;margin-bottom:5px" class="pull-left search">年月：
+						</div>
+					<input id="searchStartDt"lbl_typ="datemonth" linkslt="" link_slt_id="" param="month" slt_mod_id="SM016" slt_id="SLT001" type="text" value="" style="width:100px" class="form-control form-datetimepicker date-length1" readonly="readonly" readonly="readonly">
+				</div>
+
+					<div style="margin-right: 5px;margin-top:0px;margin-bottom:0px" class="pull-left search">
+						<div style="margin-top:0px;margin-bottom:5px" class="pull-left search">字段名称：
+						</div>
+						<input id="fldId" type="text"  style="width:100px" class="pull-left form-control date-length1 search-field">
+					</div>
+
+					<div style="margin-right: 5px;margin-top:0px;margin-bottom:0px" class="pull-left search">
+						<div style="margin-top:0px;margin-bottom:5px" class="pull-left search">字段描述：
+						</div>
+						<input id="tblNm" actval="" lbl_typ="input" linkslt="" link_slt_id="" param="prj_nm" slt_mod_id="SM019" slt_id="SLT002" type="text" value="" style="width:100px" class="pull-left form-control date-length1 search-field" >
+					</div>
+					<div style="margin-right: 5px;margin-top:0px;margin-bottom:0px" class="pull-left search">
+						<div style="margin-top:0px;margin-bottom:5px" class="pull-left search">是否变化：</div>
+						<select id="testSelect" actval="" defval="null" lbl_typ="selectall" linkslt="" link_slt_id="" param="org_id" slt_mod_id="SM003" slt_id="SLT002" class="pull-left form-control search-field hasSonSelLink" style="width: 120px;">
+							<option value=""></option>
+							<option value="是">是</option>
+							<option value="否">否</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	<!-- 列表内容 -->
+	<div class="rptDataTable" id="rptData" style="">
+		<table id="dataListGrid"></table>
+	</div>
+
+</body>
+</html>

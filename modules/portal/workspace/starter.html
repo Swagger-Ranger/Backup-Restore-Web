@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../../../plugins/ztree/css/metroStyle/metroStyle.css">
+  <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../../static/css/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../../static/css/ionicons.min.css">
+  <!-- Theme style -->
+   <link rel="stylesheet" href="../../../static/css/AdminLTE.min.css"> 
+
+   <link rel="stylesheet"  href="../../../static/css/starter.css">
+  
+<script src="../../../static/js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../../static/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../../static/js/adminlte.min.js"></script>
+<script src="../../../static/js/jquery.mloading.js"></script>
+<script src="../../../plugins/layer/layer.js"></script>
+<script src="../../../static/js/vue.min.js"></script>
+<script src="../../../static/js/validator.min.js"></script>
+<script src="../../../plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../../static/js/common.js"></script>
+
+<script src="starter.js"></script>
+<!-- 
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+</head>
+<body>
+<div class="rapper" v-cloak>
+  	<div class="head_text">
+     <p>最近浏览</p> 
+    </div>
+<div id="his"> 
+
+ </div>
+
+
+    <div class="head_text padding_top50" style="padding-top:15%">
+     <p>我的关注</p> 
+    </div>
+
+<div id="favorites"> 
+
+</div>
+
+    <div class="col-md-3">
+      <div >
+        <div class="img_container">
+          <img src="../../static/img/plus.png" width="80%" height="40px" style="cursor:crosshair" onclick="authorizedUserData()">
+        </div>
+      </div>
+    </div>
+</div>
+  <!-- /.content-wrapper -->
+
+
+<!-- 添加收藏 -->
+<div id="UserDataLayer" style="display: none;padding:10px;" v-cloak>
+<div id="rrapp1">
+    <div v-show="!showList" class="panel panel-default">
+		<form class="form-horizontal w_p_100">
+			<div class="form-group">
+				<div class="tab-content" id="dataTree">
+				    <div class="tab-pane fade in active" id="menuTreeTab">
+					   		<div class="col-sm-1"><span  style="font-weight: 600;">可收藏：</span></div>
+					   	<div class="col-sm-4">
+						  <input type="text" class="form-control" v-model="q.menuname" id="queryname"  placeholder="名称">
+ 					      <ul id="menuTree" class="ztree tree-div"></ul>
+					    </div>
+					    <div class="col-sm-1"><a class="btn btn-primary" onClick="reloadMenuTree()"><i class="fa fa-eye"></i>&nbsp;查询</a>
+					    <a class="btn btn-primary" style="margin-top:20px" onClick="saveFavoritesMenu()"><i class="fa fa-arrow-right"></i>&nbsp;保存</a>
+					    </div>
+					   	<div class="col-sm-1"><span style="font-weight: 600;display">已收藏：</span></div>
+					   	<div class="col-sm-4">
+					      <ul id="menuAuthTree" class="ztree tree-div"></ul>
+					    </div>
+				
+				    </div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>首页</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="list-box">
+        <div class="servers-wrapper mysql-model" style="">
+            <div class="row" id="todo">
+
+            </div>
+        </div>
+    </div>
+<script src="../../../static/js/jquery.min.js"></script>
+<script src="../../../static/js/base.js"></script>
+<script type="text/javascript">
+
+loadTodo("todo","todo");
+
+function loadTodo(id,func){
+    $.ajax({
+        type: "GET",
+        url: portalURL + "sys/workspace/"+func,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(r){
+            console.log(r.list);
+            var str = "";   
+            $.each(r.list,function(i,item){  //遍历二维数组
+                var totalColorStr = '' ;  
+                if(item.total >= 30){
+                    totalColorStr =  '<b style="color: red;">'+item.total+'</b>';
+                }else if(item.total >=15 && item.total < 30){
+                   totalColorStr =  '<b style="color: orange;">'+item.total+'</b>';
+                }else{
+                   totalColorStr =  '<b style="color: #3c0;">'+item.total+'</b>';
+                }
+                str+=
+                '<div title="查看明细" data-url='+item.url+'?'+item.params+' data-menuname='+item.menuname+'  class="todo-card col-md-3">'+
+                    '<div class="text-num-model text">'+
+                        '<div class="title">'+
+                            '<span>'+item.typename+'</span>'+
+                            '<span>'+item.prev+'</span>'+
+                        '</div> '+
+                        '<div class="value-p">'+ totalColorStr +
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+            });
+
+            $("#"+id).html(str);
+            //绑定点击事件。
+            $('.todo-card').on('click',function() {
+                var url = $(this).data('url');
+                var name = $(this).data('menuname');
+                var menuId=getUUID();
+                if(url){
+                    parent.window.nthTabs.addTab({
+                        id: menuId,
+                        title: name,
+                        content: getContent(url),
+                    }).setActTab('#' + menuId);
+                }
+            }); 
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>
