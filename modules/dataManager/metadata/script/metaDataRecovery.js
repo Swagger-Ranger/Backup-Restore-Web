@@ -2,6 +2,9 @@ var token =window.localStorage.token;
 var vm = new Vue({
 	el: '#rrapp',
 	data: {
+		optDesc:'',
+		optOut:'',
+		optUser:'',
 		isShowParentName: true,
 		searchInput:'',	//搜索目录
 		props: {
@@ -46,8 +49,25 @@ var vm = new Vue({
 			outName: '',
 			time: '',
 		},
-		formWidth: '150px',
+		formWidth: '120px',
 		log: '',
+		options: [
+			{
+				value: '',
+				label: '全选'
+			}, {
+				value: '0',
+				label: '创建成功等待执行'
+			}, {
+				value: '1',
+				label: '执行中'
+			}, {
+				value: '2',
+				label: '执行成功'
+			}, {
+				value: '3',
+				label: '执行失败'
+			}]
 	},
 	//用于数据初始化
 	created: function() {
@@ -77,7 +97,9 @@ var vm = new Vue({
 				data: {
 					"pageSize": that.query.pageSize,
 					"currPage":that.query. pageNum,
-					"tableName": that.tableName
+					"optDesc": that.optDesc,
+					"optOut": that.optOut,
+					"optUser": that.optUser
 				},
 				cache: false,
 				async: false,
@@ -88,8 +110,10 @@ var vm = new Vue({
 					 		that.tableData[index].createtime=commonUtil.getFormatDate2(that.tableData[index].createtime);
 					 		that.tableData[index].finishtime=commonUtil.getFormatDate2(that.tableData[index].finishtime);
 					 	});
-						that.query.recordCount = data.totalCount;
-						console.log('query-----------' + that.query);
+						that.query.recordCount = data.page.totalCount;
+						console.log('query-----------' + that.query.pageSize);
+						console.log('query-----------' + that.query.recordCount);
+
 					}
 				}
 			});
@@ -131,7 +155,7 @@ var vm = new Vue({
 					request.setRequestHeader("token", token);
 				},
 				data: {
-					"tableName":that.searchInput
+					"optDesc":that.searchInput
 				},
 				cache: false,
 				async: false,
@@ -226,9 +250,15 @@ var vm = new Vue({
 	            		that.$message({
 				          showClose: true,
 				          message: '操作成功！',
-				          type: 'error'
+				          type: 'success'
 				        });
-	            	}
+	            	}else{
+						that.$message({
+							showClose: true,
+							message: r.msg,
+							type: 'error'
+						});
+					}
 	                // console.log(r);
 	            }
 	        });

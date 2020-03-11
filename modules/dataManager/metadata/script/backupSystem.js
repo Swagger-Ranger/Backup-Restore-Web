@@ -5,6 +5,40 @@ console.log('------' + token + '--------');
 new Vue({
     el: '#app',
     data: function() {
+    	var validata_password = (rule, value, callback) => {
+			if(this.form.hdssysPwd2){
+				if(!value){
+					callback(new Error('请输入您的密码'))
+				}else if(!(value === this.form.hdssysPwd2)){
+					callback(new Error('两次输入的密码不一致'))
+				}else{
+					callback()
+				}
+			}else{
+				if(!value){
+					callback(new Error('密码不能为空'))
+				}else{
+					callback()
+				}
+			}
+		};
+		var validataComfirmpwd = (rule, value, callback) => {
+			if(this.form.hdssysPwd2){
+				if(!value){
+					callback(new Error('请确认您的密码'))
+				}else if(!(value === this.form.hdssysPwd)){
+					callback(new Error('两次输入的密码不一致'))
+				}else{
+					callback()
+				}
+			}else{
+				if(!value){
+					callback(new Error('密码不能为空'))
+				}else{
+					callback()
+				}
+			}
+		};
         return {
             formInline: {
                 hdssysCname: ''
@@ -23,6 +57,7 @@ new Vue({
                 dbname: '',
                 hdssysUser: '',
                 hdssysPwd: '',
+                hdssysPwd2: '',
             },
             rules: {  //表单校验
                 hdssysCname: [
@@ -38,7 +73,10 @@ new Vue({
                     { required: true, message: '请输入系统用户', trigger: 'blur' }
                 ],
                 hdssysPwd: [
-                    { required: true, message: '请输入系统密码', trigger: 'blur' }
+                    { required: true, trigger: 'blur', validator: validata_password }
+                ],
+                hdssysPwd2: [
+                    { required: true, trigger: 'blur', validator: validataComfirmpwd }
                 ],
             },
             formLabelWidth: '150px'
@@ -46,6 +84,9 @@ new Vue({
     },
     mounted() {
         this.getTableData();
+    },
+    computed:{
+    	 
     },
     methods: {
         addFile(){
@@ -57,6 +98,7 @@ new Vue({
             that.form.dbname= '';
             that.form.hdssysUser= '';
             that.form.hdssysPwd= '';
+            that.form.hdssysPwd2= '';
             that.dialogFormVisible = true;
         },
         editFile(){
@@ -76,6 +118,7 @@ new Vue({
                 that.form.dbname= selectRow[0].dbname;
                 that.form.hdssysUser= selectRow[0].hdssysUser;
                 that.form.hdssysPwd= selectRow[0].hdssysPwd;
+                that.form.hdssysPwd2= selectRow[0].hdssysPwd;
                 that.title = '修改归档配置';
             }
         },

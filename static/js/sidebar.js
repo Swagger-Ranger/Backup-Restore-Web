@@ -284,7 +284,7 @@ $(function () {
         if ($('.side-bar').hasClass('shrink')) {
             enlarge();
             $('#content').css('padding-left', '220px');
-            $('.brand-icon').children("img").attr("src", "static/img/highjet.svg");
+            $('.brand-icon').children("img").attr("src", "static/img/myccb.png");
             $('.brand-icon').children("img").css({
                 width:'200px',
                 height:'50px',

@@ -17,13 +17,13 @@
   <div id="app">
 		<el-form :inline="true" :model="formInline" class="demo-form-inline" size="small">
 		  <el-form-item label="源系统名">
-		    <el-input v-model="formInline.hdssysCname" placeholder="源系统名"></el-input>
+		    <el-input v-model="formInline.sourceTable" placeholder="源系统名"></el-input>
 		  </el-form-item>
 		  <el-form-item label="源系统表名">
 		    <el-input v-model="formInline.sourceTablCname" placeholder="源系统表中文名"></el-input>
 		  </el-form-item>
 		   <el-form-item label="历史数据平台表名">
-		    <el-input v-model="formInline.hdsTableCname" placeholder="历史数据平表中文名"></el-input>
+		    <el-input v-model="formInline.hdsTable" placeholder="历史数据平表中文名"></el-input>
 		  </el-form-item>
 		  <el-form-item>
 		    <el-button type="primary" @click="getTableData" icon="el-icon-search">查询</el-button>

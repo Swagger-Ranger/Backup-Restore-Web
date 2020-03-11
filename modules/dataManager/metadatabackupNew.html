@@ -119,15 +119,31 @@
 					<el-col :span="24" class="grid-content bg-white m_t_10">
 						<el-col :span="24" class="m_b_10">
 							<div class="f_l l_h2">日志查询：</div>
-							<el-col :span="12">
-								<el-input placeholder="查询操作详情" v-model="optDesc" class="input-with-select" @keyup.enter.native="onSearch" size="small">
-								</el-input>
-								<el-input placeholder="查询操作员" v-model="log" class="input-with-select" @keyup.enter.native="onSearch" size="small">
-								</el-input>
-								<el-input placeholder="查询操作结果" v-model="log" class="input-with-select" @keyup.enter.native="onSearch" size="small">
-								</el-input>
-								<el-button type="primary" @click="createTableData" icon="el-icon-search">查询</el-button>
-							</el-col>
+							<el-row :gutter="20">
+								<el-col :span="5">
+									<el-input placeholder="查询操作详情" v-model="optDesc" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>
+								</el-col>
+								<el-col :span="5">
+									<el-input placeholder="查询操作员" v-model="optUser" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>
+								</el-col>
+								<el-col :span="5">
+									<el-select v-model="optOut" placeholder="请选择操作结果" @keyup.enter.native="onSearch" size="small">
+									    <el-option
+									      v-for="item in options"
+									      :key="item.value"
+									      :label="item.label"
+									      :value="item.value">
+									    </el-option>
+									  </el-select>
+									<!--<el-input placeholder="查询操作结果" v-model="optOut" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>-->
+								</el-col>
+								<el-col :span="4">
+									<el-button type="primary" @click="createTableData" icon="el-icon-search" size="small">查询</el-button>
+								</el-col>
+							</el-row>
 						</el-col>
 						<el-table :data="tableData" height="200" border style="width: 100%">
 							<el-table-column prop="createtime" label="操作时间" width="160">

@@ -59,14 +59,15 @@
       prop="dbname"
       label="源系统数据库名">
     </el-table-column>
-			<el-table-column
-					prop="hdssysUser"
-					label="源系统数据库账户">
-			</el-table-column>
-			<el-table-column
-					prop="hdssysPwd"
-					label="源系统数据库账户密码">
-			</el-table-column>
+		<el-table-column
+			prop="hdssysUser"
+			label="源系统数据库账户">
+		</el-table-column>
+		<el-table-column
+			prop="hdssysPwd"
+      v-if="false"
+			label="源系统数据库账户密码">
+		</el-table-column>
     <el-table-column
       prop="createtime"
       label="创建时间">
@@ -102,8 +103,11 @@
 	    <el-form-item label="归档系统数据库用户" prop="hdssysUser" :label-width="formLabelWidth">
 	      <el-input v-model="form.hdssysUser" autocomplete="off"></el-input>
 	    </el-form-item>
-		  <el-form-item label="归档系统数据库密码" prop="hdssysPwd" :label-width="formLabelWidth">
-	      <el-input v-model="form.hdssysPwd" autocomplete="off"></el-input>
+		  <el-form-item label="归档系统数据库密码" prop="hdssysPwd"  :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysPwd" autocomplete="off" show-password></el-input>
+	    </el-form-item>
+	     <el-form-item label="确认密码" prop="hdssysPwd2"  :label-width="formLabelWidth">
+	      <el-input v-model="form.hdssysPwd2" autocomplete="off" show-password></el-input>
 	    </el-form-item>
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">

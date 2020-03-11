@@ -4,10 +4,11 @@ new Vue({
     el: '#app',
     data: function() {
 	    return {
+			multipleTable:[],
 			formInline: {
-	          hdssysCname: '',
-	          sourceTabl: '',
-	          outTable: ''
+	          sourceTable: '',
+			  hdsTable: '',
+			  sourceTableCname: ''
 	       },
 	       tableData: [],
 	        currentPage: 1,
@@ -21,10 +22,10 @@ new Vue({
 	          sourcesysId: '',
 	          outsysOpiton:[],
 	          outsysId: '',
-	          hdsTableCname: '',
-	          hdsTableName: '',
+	          outTableCname: '',
 	          outTable: '',
-	          outTableCname: ''
+				sourceTable: '',
+				sourceTableCname: ''
 	        },
 	        rules: {  //表单校验
 	          sourcesysId: [
@@ -58,10 +59,12 @@ new Vue({
       		//新增按钮
       		var that=this;
       		that.title = '新增归档配置';
-      		that.form.hdssysCname='';
-          	that.form.hdssysName= '';
-          	that.form.dbname= '';
-          	that.form.hdssysPwd= '';
+      		that.form.sourcesysId='';
+          	that.form.outsysId= '';
+          	that.form.sourceTableCname= '';
+          	that.form.sourceTable= '';
+          	that.form.outTable= '';
+          	that.form.outTableCname= '';
       		that.dialogFormVisible = true;
       	},
       	editFile(){
@@ -76,11 +79,15 @@ new Vue({
 		        });
       		}else{
       			that.dialogFormVisible = true;
-      			that.form.hdssysCname=selectRow[0].hdssysCname;
-	          	that.form.hdssysName= selectRow[0].hdssysName;
-	          	that.form.dbname= selectRow[0].dbname;
-	          	that.form.hdssysPwd= selectRow[0].hdssysPwd;
+      			that.form.sourcesysId=selectRow[0].sourceId;
+				console.log(JSON.stringify(selectRow[0]));
+				that.form.outsysId= selectRow[0].hdsId;
+	          	that.form.sourceTableCname= selectRow[0].sourceTableCname;
+	          	that.form.sourceTable= selectRow[0].sourceTable;
+	          	that.form.outTable= selectRow[0].hdsTable;
+	          	that.form.outTableCname= selectRow[0].hdsTableCname;
       			that.title = '修改归档配置';
+				that.multipleTable = selectRow[0];
       		}
       	},
       	sub(){
@@ -90,9 +97,9 @@ new Vue({
       		if(that.title == "新增归档配置"){
       			url = baseURL + 'table/tableMapper/save';
       		}else{
-				that.form = that.$refs.multipleTable.selection[0];
-				that.form.myccbid = that.form.mapperId;
-				console.log("000000000000" + that.form);
+				// that.form = that.$refs.multipleTable.selection[0];
+				that.form.myccbid = that.multipleTable.mapperId;
+				// console.log("000000000000" + that.form.$refs.multipleTable.selection[0]);
       			url = baseURL + 'table/tableMapper/update';
       		}
 	        this.$refs['form'].validate((valid) => {
@@ -110,11 +117,24 @@ new Vue({
 					async: false,
 					success: function(r) {
 						// console.log(r);
-						that.$message({
-				          showClose: true,
-				          message: '操作成功！',
-				          type: 'success'
-				        });
+						// that.$message({
+				        //   showClose: true,
+				        //   message: '操作成功！',
+				        //   type: 'success'
+				        // });
+						if(r.code == "0"){
+							that.$message({
+								showClose: true,
+								message: '操作成功！',
+								type: 'success'
+							});
+						}else{
+							that.$message({
+								showClose: true,
+								message: r.msg,
+								type: 'error'
+							});
+						}
 					}
 				});
 				that.getTableData();
@@ -216,10 +236,12 @@ new Vue({
 					request.setRequestHeader("token", token);
 				},
 				data:
-					JSON.stringify({"currPage":that.currentPage,
+					JSON.stringify({
+						"currPage":that.currentPage,
 						"limit":that.pageSize,
-						"sourceTable":that.formInline.sourceTabl,
-						"hdsTable":that.formInline.hdssysCname
+						"sourceTable":that.formInline.sourceTable,
+						"hdsTable":that.formInline.hdsTable,
+						"sourceTableCname":that.formInline.sourceTableCname
 				}),
 				cache: false,
 				async: false,

@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>备份归档</title>
+		<title>恢复归档</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -99,7 +99,7 @@
 							</el-form-item>
 						</el-col>
 						<el-col :span="18">
-							<el-form-item label="恢复时间段">
+							<el-form-item label="备份时间段">
 								<el-date-picker
 								  size="small"
 							      v-model="logForm.time"
@@ -113,17 +113,37 @@
 							</el-form-item>
 						</el-col>
 						<el-col :span="6">
-							<el-button type="primary" plain size="small" style="margin-top: 5px; float: right;" @click="backUp">执行备份</el-button>
+							<el-button type="primary" plain size="small" style="margin-top: 5px; float: right;" @click="backUp">执行恢复</el-button>
 						</el-col>
 					</el-form>
 					<el-col :span="24" class="grid-content bg-white m_t_10">
 						<el-col :span="24" class="m_b_10">
-							<div class="f_l l_h2">恢复日志：</div>
-							<el-col :span="12">
-								<el-input placeholder="请输入表名" v-model="log" class="input-with-select" @keyup.enter.native="onSearch" size="small">
-									<el-button slot="append" icon="el-icon-search" @click="createTableData" size="small"></el-button>
-								</el-input>
-							</el-col>
+							<div class="f_l l_h2">日志查询：</div>
+							<el-row :gutter="20">
+								<el-col :span="5">
+									<el-input placeholder="查询操作详情" v-model="optDesc" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>
+								</el-col>
+								<el-col :span="5">
+									<el-input placeholder="查询操作员" v-model="optUser" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>
+								</el-col>
+								<el-col :span="5">
+									<!--<el-input placeholder="查询操作结果" v-model="optOut" class="input-with-select" @keyup.enter.native="onSearch" size="small">
+									</el-input>-->
+									<el-select v-model="optOut" placeholder="请选择操作结果" @keyup.enter.native="onSearch" size="small">
+								    <el-option
+								      v-for="item in options"
+								      :key="item.value"
+								      :label="item.label"
+								      :value="item.value">
+								    </el-option>
+								  </el-select>
+								</el-col>
+								<el-col :span="4">
+									<el-button type="primary" @click="createTableData" icon="el-icon-search" size="small">查询</el-button>
+								</el-col>
+							</el-row>
 						</el-col>
 						<el-table :data="tableData" height="200" border style="width: 100%">
 							<el-table-column prop="createtime" label="操作时间" width="160">
@@ -150,6 +170,6 @@
 	<!-- import JavaScript -->
 	<script type="text/javascript" src="metadata/script/lib/jquery.min.js" ></script>
 	<script src="metadata/script/lib/element-ui.js"></script>
-  <script src="metadata/script/metaDataBackup.js"></script>
+  <script src="metadata/script/metaDataRecovery.js"></script>
 
 </html>

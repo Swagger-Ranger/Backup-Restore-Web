@@ -51,6 +51,23 @@ var vm = new Vue({
 		},
 		formWidth: '120px',
 		log: '',
+		options: [
+			{
+				value: '',
+				label: '全选'
+			}, {
+				value: '0',
+				label: '创建成功等待执行'
+			}, {
+				value: '1',
+				label: '执行中'
+			}, {
+				value: '2',
+				label: '执行成功'
+			}, {
+				value: '3',
+				label: '执行失败'
+			}]
 	},
 	//用于数据初始化
 	created: function() {
