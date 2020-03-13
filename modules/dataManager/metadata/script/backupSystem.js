@@ -148,6 +148,19 @@ new Vue({
                         async: false,
                         success: function(r) {
                             // console.log(r);
+                            if(r.code == "0"){
+                                that.$message({
+                                    showClose: true,
+                                    message: '操作成功！',
+                                    type: 'success'
+                                });
+                            }else{
+                                that.$message({
+                                    showClose: true,
+                                    message: r.msg,
+                                    type: 'error'
+                                });
+                            }
                             that.getTableData();
                         }
                     });
