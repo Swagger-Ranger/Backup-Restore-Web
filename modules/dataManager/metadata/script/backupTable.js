@@ -7,7 +7,7 @@ new Vue({
 			multipleTable:[],
 			formInline: {
 	          sourceTable: '',
-			  hdsTable: '',
+			  hdsTableCname: '',
 			  sourceTableCname: ''
 	       },
 	       tableData: [],
@@ -240,7 +240,7 @@ new Vue({
 						"currPage":that.currentPage,
 						"limit":that.pageSize,
 						"sourceTable":that.formInline.sourceTable,
-						"hdsTable":that.formInline.hdsTable,
+						"hdsTableCname":that.formInline.hdsTableCname,
 						"sourceTableCname":that.formInline.sourceTableCname
 				}),
 				cache: false,

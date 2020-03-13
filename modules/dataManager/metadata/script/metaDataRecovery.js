@@ -95,8 +95,8 @@ var vm = new Vue({
 					request.setRequestHeader("token", token);
 				},
 				data: {
-					"pageSize": that.query.pageSize,
-					"currPage":that.query. pageNum,
+					"limit": that.query.pageSize,
+					"page":that.query. pageNum,
 					"optDesc": that.optDesc,
 					"optOut": that.optOut,
 					"optUser": that.optUser
