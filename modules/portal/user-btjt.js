@@ -295,9 +295,9 @@ var vm = new Vue({
 		saveOrUpdate : function() {
 			vm.user.roleIdList = $("#roleId").val();
 			console.log(vm.user);
-			if (vm.validator()) {
-				return;
-			}
+			// if (vm.validator()) {
+			// 	return;
+			// }
 
 			var url = "sys/user/save";
 			if (vm.user.userId == null) {

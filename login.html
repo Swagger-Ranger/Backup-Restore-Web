@@ -35,18 +35,18 @@
     <!--<img class="img-logo-fenglianyun" src="static/img/logohj.png" alt="">-->
     <!--<span style="color:#fff;"></span>-->
   </div>
-  <div class="c_blue f24 w100 f_l t_c">欢迎登录</div>
+<!--  <div class="c_blue f24 w100 f_l t_c">欢迎登录</div>-->
   <div class="login-box-body">
       <!-- <p class="login-box-msg">登　录</p> -->
       
       <div v-if="error" class="alert alert-danger alert-dismissible">
         <h4 style="margin-bottom: 0px;"><i class="fa fa-exclamation-circle"></i> {{errorMsg}}</h4>
       </div>
-      <div class="form-group has-feedback text1 f_l m_t40">
+      <div class="form-group has-feedback text1 f_l m_t20">
           <input style="padding-right: 0;" type="text" class="form-control" v-model="form.username" placeholder="请输入用户名">
           <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
       </div>
-      <div class="form-group has-feedback text2 f_l m_t40">
+      <div class="form-group has-feedback text2 f_l m_t20">
           <input style="padding-right: 0;" type="password" class="form-control" v-model="form.password" @keyup.enter="login" placeholder="请输入密码">
           <!--<span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
       </div>
@@ -65,7 +65,7 @@
           </div>
         </div> -->
         <!-- /.col -->
-        <div class="col-xs-12 m_t40">
+        <div class="col-xs-12 m_t20">
           <button type="button" class="btn btn-primary btn-block btn-flat" @click="login">登录</button>
         </div>
         <!-- /.col -->
@@ -75,7 +75,7 @@
   </div>
   <!-- /.login-box-body -->
 </div>
-	<div class="copyright f_l f18 c_gray2 m_t40">Copyright (c) 2019 All Rights Reserved.</div>
+	<div class="copyright f_l f18 c_gray2 m_t40">Copyright (c) 2020 All Rights Reserved.</div>
 <!-- /.login-box -->
 <script src="static/js/jquery.min.js"></script>
 <script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
