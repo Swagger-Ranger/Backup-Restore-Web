@@ -235,6 +235,19 @@ new Vue({
 			                async: false,
 			                success: function(r) {
 			                    // console.log(r);
+                                if(r.code == "0"){
+                                    that.$message({
+                                        showClose: true,
+                                        message: '删除成功！',
+                                        type: 'info'
+                                    });
+                                }else{
+                                    that.$message({
+                                        showClose: true,
+                                        message: r.msg,
+                                        type: 'error'
+                                    });
+                                }
 			                    that.getTableData();
 			                }
 			            });
@@ -246,10 +259,10 @@ new Vue({
 		            }
 		          }
 		        }).then(action => {
-		          this.$message({
-		            type: 'info',
-		            message: '删除成功！'
-		          });
+		          // this.$message({
+		          //   type: 'info',
+		          //   message: '删除成功！'
+		          // });
 		        });
 		    }
 	    },

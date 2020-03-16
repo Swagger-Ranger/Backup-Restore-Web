@@ -148,7 +148,7 @@ var vm = new Vue({
 			//模拟数据end
 			$.ajax({
 				type: 'GET',
-				url: baseURL + 'opt/getMapperTree', // 接口 URL 地址
+				url: baseURL + 'opt/getMapperTreeFlip', // 接口 URL 地址
 				contentType: "application/x-www-form-urlencoded;charset=utf-8",
 				dataType: "json",
 				beforeSend: function(request) {
