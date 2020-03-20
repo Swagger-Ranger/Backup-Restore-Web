@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>接口管理</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<style>
+	 
+
+</style>
+<script src="../../../static/js/jquery-1.10.2.min.js"></script>
+<script src="../../../static/js/commonUtil.js"></script>
+<script src="../../../static/js/commonGobalValue.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div class="maincontent">
+		<table style="border-collapse:collapse; border-spacing:0;width:1000px;">
+			<tbody>
+				<tr>
+					<td valign="top">
+						<table border="0" cellpadding="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td>
+										<input type="hidden" name="appkey" id="appkey" value="1">
+										<input type="hidden" name="api_soure" id="api_soure" value="2">
+										<input type="hidden" name="c_SessionId" id="c_SessionId" value="3">
+										<table class="parameters" width="500" border="0" cellpadding="4" cellspacing="0">
+											<tbody>
+												<tr>
+													<td width="160" align="right">返回格式(Format):</td>
+													<td width="340">
+														<select id="format" name="format" style="width:195px;">
+															<option value="json">JSON</option>
+															<option value="txt">TXT</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td align="right">apiID(API Id)：</td>
+													<td>
+														<span id="SipApinameDiv">
+															<input type="text" id="apiParam_item_id" name="item_id" value style="width: 192px;">
+															<!-- <select name="sip_apiname" id="sip_apiname" style="width: 195px">
+																<option value>--请选择--</option>
+																<option>id</option>
+															</select> -->
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<td align="right">token：</td>
+													<td>
+														<span id="SipApinameDiv">
+															<input type="text" id="apiParam_tk_id" name="tk_id" value style="width: 192px;">
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<td align="right">提交方式(Method)：</td>
+													<td>
+														<input type="radio" name="sip_http_method" value="2" checked>"POST"
+														<input type="radio" name="sip_http_method" value="1">"GET"
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table width="500" border="0" cellpadding="4" cellspacing="0">
+											<tbody>
+												<tr>
+													<td width="160">&nbsp</td>
+													<td width="340" align="left">
+														<!-- <input type="apiTestButton" type="button" value="提交测试(Execute)"> -->
+														<button>提交测试(Execute)</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<form id="errorCodeSearchForm" name="errorCodeSearchForm" action="" target="_blank" method="post"></form>
+					<input type="hidden" name="apiCategoryId" id="apiCategoryIdForCodeSearch">
+					<input type="hidden" name="apiName" id="apiNameForCodeSearch">
+					<input type="hidden" name="error" id="error">
+					<td valign="top">
+						"API请求参数(API Request)："
+						<br>
+						<textarea name="param" id="param" cols="90" rows="5" ></textarea>
+						<br>
+						<br>
+						"SDK调用示例代码(Sample Code)："
+						<br>
+						<textarea name="resultShow" id="resultShow" cols="90" rows="8" ></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div>
+	<input type="button" id="id1" name="aaaa" value = "接口调用" onclick="postDetail()"> 
+	<input type="button" id="aaaaaaaa1" name="bbb" value="获取文件" onclick="DownLoadFile()"> 
+</div>
+
+</body>
+
+<script type="text/javascript">
+	
+
+	/**js提交post请求：隐藏请求参数**/
+function postDetail() {
+	let URL = "/dataApi/interface/getData";
+	console.log("token:"+token);
+
+    $.ajax({
+            url:'/dataApi/interface/getData',
+            //url:'/dataApi/swagger/postApiData',
+            data:{
+            	"rptId":"sys_getLog",
+            	"pname":"pname",
+            	"p2":"sss",
+            	"p3":"1234"
+            },
+            type:'get',
+            contentType: "application/json",
+
+           
+            success:function (rel) {
+            	
+            	console.log("code1"+rel.code);
+            	console.log("msg:"+rel.msg);
+            },
+            error:function (rel) {
+                console.log(rel.msg)
+            }
+        })
+  }
+
+//调用
+//var param = new Array();
+//param.push({ "name":"id","value":"id123"});
+
+//var serverUrl = "/a/save";
+//postDetail(serverUrl,param);
+
+ var dloadfile = function() { 
+  // alert('download');
+	options ={
+      url:"/dataApi/interface/downloadData",
+
+      //url:"/dataApi/swagger/downloadDataTxt",
+      //url:"/dataApi/interface/getData",
+      token:token,
+      //data:{token:token,rptId:'sys_vdata_getwx_app'}//要发送的数据
+      data:{ "token":token,"rptId":"sys_getLog","tabId":"1576926757783"}
+	};
+    var config = $.extend(true, { method: 'post' }, options);
+    var $iframe = $('<iframe id="down-file-iframe" />');
+    var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
+    $form.attr('action', config.url);
+    for (var key in config.data) {
+        $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+    }
+    $iframe.append($form);
+    $(document.body).append($iframe);
+    $form[0].submit();
+    $iframe.remove();
+} 
+
+function DownLoadFile(){
+	dloadfile();
+}
+</script>
+</html>

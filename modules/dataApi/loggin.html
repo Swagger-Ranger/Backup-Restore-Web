@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>系统日志</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+<link href="../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.css"  rel="stylesheet">
+<!-- <link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../css/main.css"> -->
+<link rel="stylesheet" href="../../static/css/custom.css">
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/vue.min.js"></script>
+
+<!-- bootstrap-table -->
+
+<script src="../../plugins/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/core/tableExport.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- bootstrap-datetimepicker -->
+<link href="../../plugins//bootstrap/datetimepicker/css/bootstrap-datetimepicker.css"  rel="stylesheet" />
+<script src="../../plugins//bootstrap/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../../plugins//bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../static/js/commonUtil.js"></script>
+<script src="../../static/js/commonGobalValue.js"></script>
+<script src="../../static/js/common_bootstraptable.js"></script>
+<script src="../../static/js/jqgridCommon.js"></script>
+<style>
+	 .ui-jqgrid tr.jqgrow td { 
+	 	text-overflow : ellipsis; 
+	 }
+	 .ui-th-ltr{
+	 	text-align: center;
+	 }
+	 #rrapp {
+	    padding: 5px;
+	}
+	.grid-btn {
+    margin-top: 0;
+    margin-bottom: 12px;
+	}
+</style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div class="sc" style="height:30px">
+	
+
+		<!-- <div style="width: :100%;height:30px;padding-top:10px;">
+
+			<div class="pull-left search " style="padding-top: 5px"><span>操作时间：</span></div>
+			<div style="margin-right: 5px;" class="pull-left search">
+				<input type="text" value="" id="searchStartDt" class="form-control form-datetimepicker date-length1" readonly="readonly">
+			</div>
+			<div class="pull-left search " style="padding-top: 5px"><span>至</span></div>
+			<div style="margin-left:5px;margin-right: 5px;" class="pull-left search">
+				<input type="text" value="" id="searchEndDt" class="form-control form-datetimepicker date-length1" readonly="readonly">
+			</div>
+			<div style="margin-right: 5px;" class="pull-left search">
+				<input id="searchText" class="form-control" type="text" placeholder="搜索">
+			</div>
+			<div class="columns columns-right btn-group pull-left" style="margin-right:550px">
+				<a  id="searchBtnRpt" class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a>
+			</div>	
+		</div> -->
+		
+	</div>
+
+	<!-- <div class="pull-left" style="color:#555;font-size:20px;line-height: 64px;margin-left:26px;font-weight: 700;">
+		系统日志
+	</div> -->
+	<div id="tb" class="tb">
+		<div id="reportTableDiv">
+			<table id="reportTable"></table>
+		</div>
+	</div>
+
+
+	<div>
+		
+
+    <!-- textare模态框 -->    
+    <div class="modal fade" id="textareaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        ×</button>
+                    <h4 id="textareaTitle" class="modal-title"></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <textarea id="textareaCommon" readonly="readonly" rows="10" style="width: 100%;border-radius: 4px;resize:none;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script src="loggin.js"></script>
+</body>
+</html>

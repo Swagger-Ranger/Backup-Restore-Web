@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>接口管理</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../plugins/bootstrap/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet" href="../../static/css/custom.css">
+<link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+ -->
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../static/css/main.css">
+ <!-- <link rel="stylesheet" href="../../static/css/jquery.mloading.css" media="screen">
+ --><script src="../../static/js/jquery-1.10.2.min.js"></script>
+<!-- <script src="../../static/js/jquery.mloading.js"></script> -->
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/vue.min.js"></script>
+<script src="../../static/js/validator.min.js"></script>
+<!-- <script src="../../plugins/jqgrid/grid.locale-cn.js"></script> -->
+<!-- <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script> -->
+
+<!-- bootstrap-table -->
+
+<script src="../../plugins/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/extensions/export/core/tableExport.min.js"></script>
+<script src="../../plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../static/js/bootstrap-paginator.js"></script>
+
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../static/js/commonUtil.js"></script>
+<script src="../../static/js/commonGobalValue.js"></script>
+<script src="../../static/js/base.js"></script>
+<script src="../../static/js/bootstrapTableCommon.js"></script>
+<style>
+	
+	.col-sm-2 {
+	    width: 16.66%;
+	}
+	.control-label {
+    font-weight: normal;
+    padding-bottom: 7px;
+}
+body {
+    padding: 5px;
+}
+.inter-info .form-control,.inter-descr .form-control, {
+
+	width: 90%;
+}
+.card-head {
+    min-height: 38px;
+    margin-bottom: -1px;
+    padding: 0 20px;
+    color: rgba(0,0,0,.85);
+    font-weight: 500;
+    font-size: 16px;
+    background: 0 0;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 2px 2px 0 0;
+    zoom: 1;
+}
+.card-head-title {
+    display: inline-block;
+    line-height: 30px;
+    flex: 1 1;
+    padding: 4px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 30px;
+}
+
+.footer-toolbar-index-toolbar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+    height: 56px;
+    padding: 0 24px;
+    line-height: 56px;
+    background: #fff;
+    border-top: 1px solid #e8e8e8;
+    box-shadow: 0 -1px 2px rgba(0,0,0,.03);
+}
+.footer-toolbar-index-toolbar .footer-toolbar-index-left {
+    float: left;
+}
+.footer-toolbar-index-toolbar .footer-toolbar-index-right {
+    float: right;
+}
+.ant-btn-primary {
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 0 rgba(0,0,0,.045);
+}
+.ant-btn>i, .ant-btn>span {
+    display: inline-block;
+    transition: margin-left .3s cubic-bezier(.645,.045,.355,1);
+    pointer-events: none;
+}
+.ant-btn {
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    box-shadow: 0 2px 0 rgba(0,0,0,.015);
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: rgba(0,0,0,.65);
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+}
+.ant-card-extra {
+    float: right;
+    margin-left: auto;
+    padding: 8px 0;
+    color: rgba(0,0,0,.65);
+    font-weight: 400;
+    font-size: 14px;
+}
+.noOpenText, .isOpenText{
+	cursor: pointer;
+	color: #337ab7;
+}
+#table-toolbar img{ width: 24px; cursor: pointer;}
+.active{ display: block;}
+.nactive{ display: none;}
+#quare{
+    flex-direction: row;
+    /*justify-content: space-around;*/
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    background: #f8f8f8;
+    padding-left: 20px;
+    padding-right: 160px;
+}
+.dataList{
+    max-width: 352px;
+    padding: 14px 16px;
+    width: 33.33%;
+}
+.dataList ul{
+    padding: 0;
+    border-radius: 5px;
+    box-shadow:0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    float: left;
+    position: relative;
+    background: #fff;
+    margin-bottom: 0;
+}
+.dataList ul li{ 
+    list-style-type: none;
+    padding: 5px 14px;
+    color: #cfcfcf;
+}
+.dataList ul li:first-child{
+	background:rgba(102,102,102,0.7);
+    display: flex;
+    flex-direction: column;
+    height: 106px;
+    justify-content: space-around;
+    position: absolute;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.dataList ul li:first-child span{
+	color: #fff;
+    text-align: center;
+    margin: 0 auto;
+    padding: 6px 24px;
+    border-radius: 15px;
+    cursor: pointer;
+    background: #1B94F9;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    margin-bottom: 16px;
+    line-height: 18px;
+}
+.dataList ul li:last-child{
+	color: #333333;
+    padding: 8px 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #EFEFEF;
+}
+table{width: 100%;}
+.dataList ul li table tr td{
+	display:inline-block;/*行内元素必须添加此属性，宽度设置才能有效*/
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    width: calc(100% - 56px);
+}
+.dataList ul li table tr td:first-child{
+	width: 56px;
+    padding: 2px 0;
+}
+.dataList ul li table tr:nth-child(4),.dataList ul li table tr:nth-child(5){
+	width: 50%;
+	display: block;
+	float: left;
+}
+.dataList ul li:last-child i{
+	color: #333333;
+    float: right;
+}
+.dataList ul li:last-child div{ float: left;}
+.dataList a{
+	color: #333333;
+}
+.dataList img{
+	width: 17px;
+    margin-bottom: 7px;
+    margin-right: 14px;
+    cursor: pointer;
+}
+.dataList label{
+	text-align: center;
+}
+.dataList label:first-child{
+	text-align: right;
+    margin-right: 16px;
+    margin-top: 10px;
+}
+.dataList i{
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}
+.dataList input{
+	width: calc(100% - 95px);
+	border: none;
+}
+input:focus{outline:none;}
+.dataList input[disabled]{
+	border: none;
+    background: none;
+}
+select{
+	width: auto;
+}
+nav{
+    text-align: center;
+    background: #f8f8f8;
+}
+.modal-content {
+    background-color: #fff!important;
+}
+.modal h5{ font-weight: bold; letter-spacing: 0.05rem;}
+.modal-header:before{
+	display: block;
+    height: 14px;
+    width: 3px;
+    background: #1B94F9;
+    float: left;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+.modal-body p{ white-space: pre-wrap;}
+.modal-body{
+    max-height: 400px;
+    overflow-y: auto;
+}
+.modal-header #text{ width: 510px;}
+#input {position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;}
+.modal-header .btn{ font-size: 12px;}
+#mymodal-data1 .modal-header:before{ margin-top: 1px}
+#sqlInput span{ float: left; line-height: 2.4;}
+#pageNum,#pageSize{ width: 40px; float: left;}
+#sqlInput .form-group:first-child{margin-top: 10px;}
+</style>
+</head>
+
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList" class="sc">
+		<div id="table-toolbar" class="fixed-table-toolbar">
+			<div class="m-l-r-5 pull-left search">
+				<select class="form-control pull-left" @keyup.enter="query" id="system" v-on:change="systemSelect($event)">
+					<option v-for="item in system" v-bind:value="item">{{item}}</option>
+				</select>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<select class="form-control pull-left" @keyup.enter="query" id="module" v-on:change="moduleSelect($event)">
+					<option v-for="item in module" v-bind:value="item">{{item}}</option>
+				</select>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<select class="form-control pull-left" @keyup.enter="query" id="level" v-on:change="levelSelect($event)">
+					<option v-for="item in level" v-bind:value="item">{{item}}</option>
+				</select>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<select class="form-control pull-left" @keyup.enter="query" id="sqlDbtype" v-on:change="sqlDbtypeSelect($event)">
+					<option v-for="item in sqlDbtype" v-bind:value="item">{{item}}</option>
+				</select>
+			</div>
+			<div class="pull-left search">
+				<input type="text" class="form-control" v-model="q.interName" @keyup.enter="query" placeholder="接口名称">
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button class="btn btn-primary" id='btnSearch'>查询</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</button>
+			</div>
+			<!--<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</button>
+			</div>
+			<div class="m-l-r-5 pull-left search">
+				<button v-if="hasPermission('sys:user:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</button>
+			</div>-->
+			<div class="m-l-r-5 pull-right search" style="margin-top: 15px;" @click="changeShowWay">
+				<img class="active" src="../../static/img/line.png" title="矩阵排列">
+				<img class="nactive" src="../../static/img/quare.png" title="列表排列">
+			</div>
+		</div>
+    </div>
+
+    <div v-show="showList" id="tb" class="tb">
+		<div id="reportTableDiv">
+			<table id="table"></table>
+			<div id="quare" style="display: none;"></div>
+			<nav><ul class="pagination" id="page" style="display: none;"></ul></nav>
+		</div>
+		
+		<!--预览接口-->
+		<div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		   <div class="modal-dialog">
+		      <div class="modal-content">
+		         <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		            <h5 class="modal-title"></h5>
+		            <h6 id="text" class="pull-left"></h6>
+					<textarea id="input" class="pull-left" readonly="readonly"></textarea>
+					<button onclick="copyText()" class="btn btn-primary pull-right">复制</button>
+		         	<p id="sqlInput">
+		         	</p>
+		            <!--<textarea value="复制" id="input" type="button" class="f_r"/></textarea>-->
+		         </div>
+		         <div class="modal-body">
+		            <p id="json"></p>
+		         </div>
+		         <div class="modal-footer">
+		            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		         </div>
+		      </div>
+		   </div>
+		</div>
+		
+	</div>
+
+	<div v-show="revisionBox" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<div class="modal fade" id="mymodal-data1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 5.2rem;">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h5 class="modal-title">绑定IP</h5>
+						<h6 id="text1" class="pull-left"></h6>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal w_p_100">
+							<div class="form-group">
+								<div class="col-sm-1 control-label" style="width: 200px; text-align: center">接口名称</div>
+								<div class="col-sm-5">
+									<input type="text" id="se" class="form-control"  v-model="ipt.interName" placeholder="接口名称" disabled/>
+								</div>
+								<div class="col-sm-3 control-label"></div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-1 control-label" style="width: 200px; text-align: center">接口Id</div>
+								<div class="col-sm-5">
+									<input type="text" id="sid" class="form-control" v-model="ipt.rptId" placeholder="接口ID" disabled/>
+								</div>
+								<div class="col-sm-3 control-label"></div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-1 control-label" style="width: 200px; text-align: center">绑定IP</div>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="ip" v-model="ipt.ip" placeholder="IP"/>
+								</div>
+								<div class="col-sm-3 control-label"></div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-1 control-label" style="width: 200px; text-align: center">密钥</div>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" id="theKey" placeholder="密钥"/>
+								</div>
+								<div class="col-sm-3 control-label"></div>
+							</div>
+							<div class="form-group" style="padding-left: 20%;">
+								<div class="col-sm-2 control-label"></div>
+								<a class="btn btn-default btn-outline" data-dismiss="modal"><i class="fa fa-close"></i> 取消</a>
+	                        	<a class="btn btn-primary btn-info btn-outline checkHide" onclick="updateIp()"><i class="fa fa-save"></i> 确定</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal" style="width: 100%;padding:20px;background-color: #eff3f7;">
+			<div style="background-color: #fff;padding-bottom:10px;">
+				<div class="card-head dn">
+					<div class="card-head-title">数据信息</div>
+					<div class="ant-card-extra"><a onclick="change1(this)" href="javascript:void(0)">收起</a></div>
+				</div>
+				<div class="inter-info">
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>接口名：</label>
+					      <input type="text" class="form-control" v-model="ipt.interName" placeholder="接口名"/>
+					    </div>
+					   	<div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>接口Id：</label>
+					      <input v-bind:disabled="!showPassword" type="text" class="form-control" v-model="ipt.rptId" placeholder="接口id"/>
+					    </div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>数据源：</label>
+					      	<select v-show="false" v-model="ipt.sqlDbtype" id="dc" class="form-control" @change="sqlDbtypeSelected">
+					      		<option v-for="item in sqlDbtypeList" v-bind:value="item.id">
+						        	{{ item.name }}
+						      	</option>
+					      		<!-- <option value="oracle">oracle</option>
+					      		<option value="MYSQL">MYSQL</option>
+					      		<option value="HIVE">HIVE</option> -->
+					      	</select>
+
+					      	<select v-model="ipt.sqlDbsource" id="sqlDbsource" class="form-control">
+						    	<option v-for="item in sqlDbSourceList" v-bind:value="item.id">
+						        	{{ item.name }}
+						      	</option>
+							</select>
+					    </div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>类型：</label>
+					      	<select id="dc" type="text" class="form-control" v-model="ipt.paging" placeholder="分页">
+								<option>数据</option>
+								<option>结果</option>
+					      	</select>
+					    </div>
+					</div>
+					<div class="form-group data-info" v-show="showColumn">
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>系统：</label>
+					      	<input type="text" class="form-control" v-model="ipt.apiSystem" placeholder="系统"/>
+					    </div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;"></span>模块：</label>
+					      	<input type="text" class="form-control" v-model="ipt.apiModule" placeholder="模块"/>
+					    </div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>指标/维度：</label>
+					      	<select v-model="ipt.isDimension" id="deptId" class="form-control">
+						    	<option v-for="item in isDimensionList" v-bind:value="item.id">
+						        	{{ item.name }}
+						      	</option>
+							</select>
+					    </div>
+					   	<div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;"></span>排序：</label>
+					      <input type="text" class="form-control" v-model="ipt.orderNum" placeholder="排序"/>
+					    </div>
+					</div>
+					
+					<div class="form-group data-info" v-show="showColumn">
+						<div class="col-sm-3">
+							   	<label class="control-label"><span style="color:red;font-weight:bold;">*</span>导出文件类型：</label>
+							  	<select v-model="ipt.outputType" id="outputType" class="form-control">
+								<option v-for="item in exportFileTypeList" v-bind:value="item.id">
+									{{ item.name }}
+								</option>
+							</select>
+						</div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;"></span>分隔符：</label>
+					      	<input type="text" class="form-control" v-model="ipt.sepchar" placeholder="分隔符, 如',', '-'"/>
+					    </div>
+					    <div class="col-sm-3">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;"></span>文件名称：</label>
+					      	<input type="text" class="form-control" v-model="ipt.filename" placeholder="文件名称"/>
+					    </div>
+					   	
+					</div>
+
+					<div class="form-group data-info" v-show="showColumn">
+					   	<div class="col-sm-12">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>汇总语句：</label>
+					   		<input type="button" class="btn btn-primary" @click="test1" value="汇总sql认证"/>
+					   		<input type="button" class="btn btn-primary" @click="example" value="sql示例"/>
+					      <textarea class="form-control" rows="3" v-model="ipt.sqlSummary"   @input="specifiName($event)"placeholder="sql"></textarea>
+					    </div>
+					</div>
+					<div class="form-group data-info" v-show="showColumn">
+					   	<div class="col-sm-12">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>明细语句：</label>
+					   		<input type="button" class="btn btn-primary" @click="test" value="明细sql认证"/>
+					   		<input type="button" class="btn btn-primary" @click="example" value="sql示例"/>
+					      <textarea id="dd" class="form-control" rows="3" v-model="ipt.sqlText" placeholder="sql"></textarea>
+					    </div>
+					</div>
+					<div class="form-group data-info" v-show="showColumn">
+					   	<div class="col-sm-12">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;"></span>描述：</label>
+					      <textarea  class="form-control" rows="2" v-model="ipt.describe" placeholder="描述"></textarea>
+					    </div>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-top:30px;padding-bottom:10px;background-color: #fff;margin-bottom:56px;display: none;">
+				<div class="card-head">
+					<div class="card-head-title">数据说明</div>
+					<div class="ant-card-extra"><a onclick="change2(this)" href="javascript:void(0)">收起</a></div>
+				</div>
+				<div class="inter-descr">
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>字段名：</label>
+					      <input type="text" class="form-control" v-model="ipt.fldnm" placeholder="字段名"/>
+					    </div>
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>字段类型：</label>
+					      <input type="text" class="form-control" v-model="ipt.fldtyp" placeholder="字段类型"/>
+					    </div>
+					    <div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>字段标签类型：</label>
+					      	<select id="dc" type="text" class="form-control" v-model="ipt.fldlbltyp" placeholder="字段标签类型">
+					      		<option>input</option>
+					      		<option>textarea</option>
+					      		<option>checkbox</option>
+					      		<option>date</option>
+					      		<option>select</option>
+					      		<option>multiSelect</option>
+					      		<option>text</option>
+					      	</select>
+					    </div>
+					</div>
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>显示名：</label>
+					      <input type="text" class="form-control" v-model="ipt.dspnm" placeholder="显示名"/>
+					    </div>
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>支持三级表头，第二级：</label>
+					      <input type="text" class="form-control" v-model="ipt.dspnmii" placeholder="支持三级表头，第二级"/>
+					    </div>
+					    <div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>支持三级表头，第一级：</label>
+					      	<input type="text" class="form-control" v-model="ipt.fldtyp" placeholder="支持三级表头，第一级"/>
+					    </div>
+					</div>
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>显示格式：</label>
+					      <input type="text" class="form-control" v-model="ipt.dspfmt" placeholder="显示格式"/>
+					    </div>
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>显示位置：</label>
+					      <input type="text" class="form-control" v-model="ipt.dsppst" placeholder="显示位置"/>
+					    </div>
+					    <div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>是否主键：</label>
+					      	<select id="dc" type="text" class="form-control" v-model="ipt.wthrpk" placeholder="是否主键">
+					      		<option>是</option>
+					      		<option>否</option>
+					      	</select>
+					    </div>
+					</div>
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>是否显示：</label>
+					      <select id="dc" type="text" class="form-control" v-model="ipt.wthrdps" placeholder="是否主键">
+					      		<option value="1">是</option>
+					      		<option value="0">否</option>
+					      	</select>
+					    </div>
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>排序字段：</label>
+					      <input type="text" class="form-control" v-model="ipt.seqnbr" placeholder="排序字段"/>
+					    </div>
+					    <div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>是否主键：</label>
+					      	<select id="dc" type="text" class="form-control" v-model="ipt.wthrpk" placeholder="是否主键">
+					      		<option value="1">是</option>
+					      		<option value="0">否</option>
+					      	</select>
+					    </div>
+					</div>
+					<div class="form-group" v-show="showColumn">
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>明细表URL：</label>
+					      <input type="text" class="form-control" v-model="ipt.dtlurl" placeholder="明细表URL"/>
+					    </div>
+					   	<div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>字段显示单位：</label>
+					      <input type="text" class="form-control" v-model="ipt.valunit" placeholder="字段显示单位"/>
+					    </div>
+					    <div class="col-sm-4">
+					   		<label class="control-label"><span style="color:red;font-weight:bold;">*</span>取值位置，命名空间：</label>
+					      	<input type="text" class="form-control" v-model="ipt.valunit" placeholder="取值位置，命名空间"/>
+					    </div>
+					</div>
+				</div>
+			</div>
+
+			</form>
+		</div>
+		<div v-show="!showList" class="footer-toolbar-index-toolbar" style="100%;"><div class="footer-toolbar-index-left"></div><div class="footer-toolbar-index-right">
+	    	<button @click="reload" type="button" class="btn btn-warning"><span>返回</span></button>&nbsp;&nbsp;
+	    	<button @click="saveOrUpdate" type="button" class="btn btn-primary"><span>提交</span></button>
+	    </div>
+	</div>
+	</div>
+<script src="interface-table.js"></script>
+<script src="interface.js"></script>
+</body>
+</html>

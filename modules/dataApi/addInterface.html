@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>备份归档</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- import CSS -->
+		<link rel="stylesheet" href="../../plugins/element-UI/lib/theme-chalk/index.css">
+		<script src="../../static/js/jquery.min.js"></script>
+		<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+		<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+		<script src="../../static/js/commonGobalValue.js"></script>
+		<script src="../../static/js/common.js"></script>
+		<script src="../../static/js/commonUtil.js"></script>
+		<style>
+			html { background: #eff3f7;}
+			.grid-content { border-radius: 5px;}
+			.bg-white { padding: 15px; background: #ffffff; }
+			.creatResult .bg-white{ padding: 0;}
+			.f-l{ float: left;}
+			.f-r{ float:right}
+			.m-h300 { min-height: 30px;}
+			.m-t10 { margin-top: 10px;}
+			.m-t15 { margin-top: 15px;}
+			.m-b10 { margin-bottom: 10px;}
+			.m-b15 { margin-bottom: 15px;}
+			.m-t20 { margin-top: 20px;}
+			.p-l10 { padding-left: 10px;}
+			.p-r10 { padding-right: 10px;}
+			.f-s-12{ font-size: 12px;}
+			.f-s-14{ font-size: 14px;}
+			.border-gray { border: 1px solid #e6e6e6;}
+			.border-right-gray { border-right: 1px solid #e6e6e6;}
+			.border-bottom { border-bottom: 1px solid #e6e6e6;}
+			.el-select { width: 100%;}
+			.el-dialog__body{ padding-top: 10px;}
+			.creatResult .el-dialog{ max-height: calc(90% - 15vh); overflow: auto;}
+			pre {
+			    display: block;
+			    font-family: inherit;
+			    white-space: pre-wrap;
+			    white-space: -moz-pre-wrap;
+			    white-space: -o-pre-wrap;
+			    word-wrap: break-word;
+			    padding: 0;
+			    margin: 0;
+			    font-size: 15px;
+			    line-height: inherit;
+			    color: inherit;
+			    word-break: break-all;
+			    background-color: transparent;
+			    border: none;
+			    border-radius: 0;
+			}
+			.statement{ font-size: 14px; color: #606266; margin-top: 10px;}
+			.statement .el-textarea__inner{ margin: 7px 0 10px;}
+		</style>
+	</head>
+
+	<body>
+		<div id="rrapp" v-cloak>
+			<!--info-->
+			<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" size="small" class="demo-ruleForm grid-content bg-white">
+				<el-row>
+					<el-col :span="8">
+						<el-form-item label="接口Id" prop="rptId">
+							<el-input v-model="ruleForm.rptId"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="接口名称" prop="interName">
+							<el-input v-model="ruleForm.interName"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="数据源" prop="sqlDbsource">
+							<el-select v-model="ruleForm.sqlDbsource" placeholder="请选择">
+							    <el-option
+							      v-for="item in ruleForm.sqlDbSourceList"
+							      :label="item.name" 
+							      :value="item.id">
+							    </el-option>
+						  	</el-select>
+							
+							<!--<el-select v-model="ruleForm.sqlDbsource" placeholder="请选择数据源">
+								<el-option v-for="item in ruleForm.sqlDbSourceList" :label="item.name" :value="item.id"></el-option>
+							</el-select>-->
+						</el-form-item>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8">
+						<el-form-item label="系统" prop="apiSystem">
+							<el-input v-model="ruleForm.apiSystem"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="模块" prop="apiModule">
+							<el-input v-model="ruleForm.apiModule"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="类型" prop="paging">
+							<el-select v-model="ruleForm.paging" placeholder="请选择类型">
+								<el-option label="数据" value="数据"></el-option>
+								<el-option label="结果" value="结果"></el-option>
+							</el-select>
+						</el-form-item>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8">
+						<el-form-item label="指标/维度" prop="isDimension">
+							<el-select v-model="ruleForm.isDimension" placeholder="请选择指标或维度">
+								<el-option label="指标" value="INDEX"></el-option>
+								<el-option label="维度" value="DIM"></el-option>
+							</el-select>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="排序">
+							<el-input v-model="ruleForm.orderNum"></el-input>
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<!--标签选择-->
+				<el-row>
+					<el-col :span="24">
+						<template>
+							<el-tabs v-model="activeName" @tab-click="handleClick" class="grid-content bg-white m-t10">
+								<el-tab-pane label="结果集" name="dataSet">
+									<el-row>
+										<el-col :span="18" class="statement">
+											<div class="demo-input-suffix">
+												<el-form-item label="汇总语句">
+											  		<el-button type="primary" size="mini" @click="dialogFormVisible=true;checkSql('汇总sql验证')">汇总sql验证</el-button>
+													<el-input type="textarea" placeholder="请输入汇总语句" v-model="ruleForm.sqlSummary"></el-input>
+												</el-form-item>
+											</div>
+											<div class="demo-input-suffix">
+												<el-form-item label="明细语句" prop="sqlText">
+											  		<el-button type="primary" size="mini" @click="dialogFormVisible=true;checkSql('明细sql验证')">明细sql验证</el-button>
+													<el-input type="textarea" placeholder="请输入明细语句" v-model="ruleForm.sqlText"></el-input>
+												</el-form-item>
+											</div>
+										</el-col>
+									</el-row>
+									<!--验证结果集对话框-->
+									<el-dialog class="creatResult" :title="dataTitle" :visible.sync="dialogFormVisible">
+										<el-form :model="ruleForm" ref="ruleForm.sql" label-width="120px" class="grid-content bg-white" size="small">
+											<el-form-item label="SQL语句">
+												<el-input type="textarea" :disabled="true" placeholder="请输入SQL语句" v-model="ruleForm.checkSql">
+												</el-input>
+											</el-form-item>
+											<el-form-item
+											    v-for="(list, index) in ruleForm.sql.list"
+											    :label="list.key"
+											    :key="list.key">
+											<el-input v-model="list.value" :placeholder="list.key"></el-input>
+											</el-form-item>
+										</el-form>
+										<el-row v-show="ruleForm.sql.list.length>0">
+											<el-col :span="24" class="m-b10">
+												<el-button type="primary" size="mini" class="f-r" @click="validataSql">sql提交</el-button>
+											</el-col>
+										</el-row>
+										<el-alert
+											v-show="ruleForm.sql.sqlListFlag"
+										    title="sql不可用"
+										    type="error">
+										</el-alert>
+										<el-row v-show="ruleForm.sql.sqlTestBtn">
+											<el-col :span="24">
+												<el-card class="box-card">
+												  <pre class="f-s-12">{{ruleForm.sql.sqlContent}}</pre>
+												</el-card>
+											</el-col>
+										</el-row>
+										<div slot="footer" class="dialog-footer">
+											<el-button type="success" size="small" @click="parmeter" class="f-l">明细sql验证</el-button>
+											<el-button @click="cancelSave()" size="small">取 消</el-button>
+											<el-button type="primary" @click="creatData()" size="small">确 定</el-button>
+										</div>
+									</el-dialog>
+								</el-tab-pane>
+								<el-tab-pane label="输出格式" name="outputType">
+									<el-row>
+										<el-col style="width: 350px;">
+											<el-form-item label="导出文件类型">
+												<el-select v-model="ruleForm.outputType" placeholder="请选择">
+												    <el-option
+												      v-for="item in ruleForm.outputOptions"
+												      :key="item.value"
+												      :label="item.label"
+												      :value="item.value">
+												    </el-option>
+											  	</el-select>
+										  	</el-form-item>
+											<el-form-item label="分隔符">
+												<el-input type="text" placeholder="分隔符，如‘,’，‘-’" v-model="ruleForm.sepchar"></el-input>
+											</el-form-item>
+											<el-form-item label="文件名称">
+												<el-input type="text" placeholder="文件名称" v-model="ruleForm.filename"></el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+									<!--<el-row>
+										<el-col :span="24" class="m-t15 m-b15">
+											数据展示
+										</el-col>
+										<el-col :span="24">
+											<el-radio-group v-model="ruleForm.dataType">
+												<el-radio label="JSON">JSON类型</el-radio>
+	  											<el-radio label="XML" :disabled="true">XML类型</el-radio>
+	  										</el-radio-group>
+										</el-col>
+										<el-col :span="24">
+											<el-card class="box-card m-t10 border-gray">
+												<el-form v-show="ruleForm.sql.list.length>0" :model="ruleForm" ref="ruleForm.sql" label-width="120px" class="grid-content bg-white" size="small">
+													<el-form-item
+													    v-for="(list, index) in ruleForm.sql.list"
+													    :label="list.key"
+													    :key="list.key">
+														<el-input v-model="list.value" :placeholder="list.key"></el-input>
+													</el-form-item>
+													<el-button type="primary" size="mini" class="f-r" @click="validataSql" v-show="ruleForm.sql.list.length>0">sql提交</el-button>
+												</el-form>
+												<el-divider></el-divider>
+												<pre class="f-s-12">{{ruleForm.sql.sqlContent}}</pre>
+											</el-card>
+										</el-col>
+									</el-row>-->
+								</el-tab-pane>
+								<!--<el-tab-pane label="权限设置" name="fourth">
+									<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+										<el-form-item label="接口Id" prop="id">
+											{{ruleForm.rptId}}
+										</el-form-item>
+										<el-form-item label="接口名称" prop="name">
+											{{ruleForm.interName}}
+										</el-form-item>
+										<el-form-item label="绑定IP" prop="IP">
+											<el-col :span="12">
+												<el-input v-model="ruleForm.IP"></el-input>
+											</el-col>
+										</el-form-item>
+										<el-form-item label="密钥" prop="pwd">
+											<el-col :span="12">
+												<el-input v-model="ruleForm.pwd"></el-input>
+											</el-col>
+										</el-form-item>
+									</el-form>
+								</el-tab-pane>-->
+							</el-tabs>
+						</template>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-form-item>
+						<el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+						<el-button @click="resetForm('ruleForm')">重置</el-button>
+					</el-form-item>
+				</el-row>
+			</el-form>
+		</div>
+	</body>
+	<script src="../../static/js/vue.min.js"></script>
+	<script src="../../plugins/element-UI/lib/index.js"></script>
+	<script src="../../static/js/xml2json.js"></script>
+	<script src="addInterface.js"></script>
+</html>

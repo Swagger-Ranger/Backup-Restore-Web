@@ -1,0 +1,35 @@
+body{
+			padding: 5px;
+			background-color: #DDD;
+		}
+		.table{
+			table-layout:fixed
+		}
+		.fixed-table-header{
+			background-color: #eee;
+			margin-right: 0!important; 
+		}
+		.sc{
+			margin: 5px;
+			background-color: #fff;
+			height: 55px;
+			padding-top:10px;
+			padding-right: 10px;
+			line-height: 2.42857143;
+		}
+		.sc-nm{
+			float:left;
+			line-height: 43px;
+			margin: 5px 0px 5px 20px;
+		}
+		.sc-lbl{
+			float:left;
+			height: 35px;
+			margin: 10px;	
+		}
+		#reportTableDiv{
+			margin: 0px 5px;
+			padding: 0px 20px;
+			background-color: #fff;
+			min-height: 50px;
+		}

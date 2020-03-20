@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sql验证</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../static/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css"> -->
+<!-- <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css"> -->
+<link rel="stylesheet" href="../../static/css/main.css">
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/vue.min.js"></script>
+<script src="../../static/js/validator.min.js"></script>
+<!-- <script src="../../plugins/jqgrid/grid.locale-cn.js"></script> -->
+<!-- <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script> -->
+<!-- <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script> -->
+<!-- <script src="../../static/js/common.js"></script> -->
+<script src="../../static/js/commonGobalValue.js"></script>
+<script src="../../static/js/commonUtil.js"></script>
+<script src="../../static/js/commonUtil-2.0.js"></script>
+<!-- <script src="../../static/js/jqgridCommon.js"></script> -->
+<style>
+	 .ui-jqgrid tr.jqgrow td { 
+	 	text-overflow : ellipsis; 
+	 }
+	 #rrapp {
+	    padding: 5px;
+	}
+	.grid-btn {
+    margin-top: 0;
+    margin-bottom: 12px;
+	}
+</style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    
+    <div v-show="showList" class="panel panel-default">
+		<form class="form-horizontal" id="tt" name="form1">
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="validataSql" value="sql提交"/>
+			</div>
+		</form>
+	</div>
+	<div class="form-group" v-show="showColumn">
+			<div class="col-sm-10">
+			    <pre><code id="json"></code></pre>
+			</div>
+	</div>
+	
+		
+
+</div>
+<!-- 选择组织 -->
+<script src="parmeter.js"></script> 
+</body>
+</html>

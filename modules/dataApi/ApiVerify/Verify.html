@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>接口管理</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<style>
+	 
+
+</style>
+<script src="../../../static/js/jquery-1.10.2.min.js"></script>
+<script src="../../../static/js/commonUtil.js"></script>
+<script src="../../../static/js/commonGobalValue.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	
+	<table style="border-collapse:collapse; border-spacing:0;width:1000px;">
+		<tbody>
+			<tr>
+				<td valign="top">
+					接口地址：
+				</td>
+				<td valign="top">					
+					<input type="text" id="apiurl" name="apiurl" value="/dataApi/swagger/postApiData"  style="width: 392px;">
+					<input type="button" id="id1" name="aaaa" value = "接口调用" onclick="postDetail()"> 
+				</td>
+			</tr>
+			<tr><td valign="top">		
+					请求参数：
+				</td><td valign="top">
+					<textarea name="param" id="param" cols="90" rows="10" >
+{
+  "rptId":"sysdebug_getpinfo",
+  "country_nm":"中国",
+  "province_nm":"广东"
+}
+					</textarea>
+				</td>
+			</tr>
+			<tr><td valign="top">
+					返回结果：
+				</td>
+				<td valign="top">
+					<textarea name="resultShow" id="resultShow" cols="90" rows="8" ></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	
+	<!--<input type="button" id="aaaaaaaa1" name="bbb" value="获取文件" onclick="DownLoadFile()"> -->
+</div>
+
+</body>
+
+<script type="text/javascript">
+	
+
+	/**js提交post请求：隐藏请求参数**/
+function postDetail() {
+	//http://120.24.65.122:82/dataApi/swagger/getApiData?rptId=sysdebug_getpinfo
+	//let URL = "/dataApi/interface/getData";
+	///dataApi/swagger/getApiData
+	//let URL = $("#apiurl").val();
+
+	//let URL ="/dataApi/interface/getData";
+
+	let URL ="/dataApi/testApi/getApiData";
+	console.log(URL);
+	console.log("token123:"+token);
+
+    $.ajax({
+            url:URL,
+            //url:'/dataApi/swagger/postApiData',
+            data:{
+            	"token":"324b18f834d6e94a3e2068ca526447b78",
+            	"rptId":"sysdebug_getpinfo",
+            	"country_nm":"中国",
+            	"province_nm":"广东",
+            	"p3":"1234"
+            },
+            type:'get',
+            contentType: "application/json",
+
+           
+            success:function (rel) {
+            	
+            	console.log(rel);
+            	
+            },
+            error:function (rel) {
+                console.log(rel.msg)
+            }
+        })
+  }
+
+//调用
+//var param = new Array();
+//param.push({ "name":"id","value":"id123"});
+
+//var serverUrl = "/a/save";
+//postDetail(serverUrl,param);
+
+ var dloadfile = function() { 
+  // alert('download');
+	options ={
+      url:"/dataApi/interface/downloadData",
+
+      //url:"/dataApi/swagger/downloadDataTxt",
+      //url:"/dataApi/interface/getData",
+      token:token,
+      //data:{token:token,rptId:'sys_vdata_getwx_app'}//要发送的数据
+      data:{ "token":token,"rptId":"sys_getLog","tabId":"1576926757783"}
+	};
+    var config = $.extend(true, { method: 'post' }, options);
+    var $iframe = $('<iframe id="down-file-iframe" />');
+    var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
+    $form.attr('action', config.url);
+    for (var key in config.data) {
+        $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+    }
+    $iframe.append($form);
+    $(document.body).append($iframe);
+    $form[0].submit();
+    $iframe.remove();
+} 
+
+function DownLoadFile(){
+	dloadfile();
+}
+</script>
+</html>
