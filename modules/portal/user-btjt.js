@@ -168,7 +168,7 @@ var vm = new Vue({
 		user : {
 			orgId : 1,
 			status : 1,
-			gender : 0,
+			gender : "male",
 			roleId: '',  //默认未空,则选择框会自动默认为请选择
 			roleIdList : [],
 			departmentId: '',  //默认未空,则选择框会自动默认为请选择
@@ -236,7 +236,8 @@ var vm = new Vue({
 				password:"",
 				// password2:"",
 				nickname:"",
-				mobile:""
+				mobile:"",
+				gender:"male"
 			};
 			vm.org = {
 				orgShtNm : null,
