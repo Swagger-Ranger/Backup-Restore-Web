@@ -296,9 +296,9 @@ var vm = new Vue({
 		saveOrUpdate : function() {
 			vm.user.roleIdList = $("#roleId").val();
 			console.log(vm.user);
-			// if (vm.validator()) {
-			// 	return;
-			// }
+			if (vm.validator()) {
+				return;
+			}
 
 			var url = "sys/user/save";
 			if (vm.user.userId == null) {
@@ -391,7 +391,10 @@ var vm = new Vue({
             if(!me.test(vm.user.username) && !me1.test(vm.user.username) && !me2.test(vm.user.username)){
                 msg+="登录账号不能太长<br>";
             }
-            var m = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@&%#_])[a-zA-Z0-9~!@&%#_]{6,12}$/;
+            // var m = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@&%#_])[a-zA-Z0-9~!@&%#_]{6,12}$/;
+            var m = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{6,12}$/;
+			// console.log("mima jioayan " + !m.test(vm.user.password));
+			// console.log("mima jioayan " + vm.user.password);
             if(!m.test(vm.user.password)){
             	msg+="请输入包含特殊字符+大小写字母+数字的6-12位密码<br>";
             }
@@ -418,9 +421,9 @@ var vm = new Vue({
 			// if (isBlank(vm.user.department)) {
 			// 	msg+="部门不能为空<br>";
 			// }
-			if (isBlank(vm.org.orgShtNm)) {
-				msg+="组织机构不能为空<br>";
-			}
+			// if (isBlank(vm.org.orgShtNm)) {
+			// 	msg+="组织机构不能为空<br>";
+			// }
 			if(vm.user.mobile == null && !me3.test(vm.user.mobile)){
 				msg+="手机号码格式不对<br>";
 			}
