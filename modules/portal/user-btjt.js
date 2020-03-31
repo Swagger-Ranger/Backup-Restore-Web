@@ -296,13 +296,16 @@ var vm = new Vue({
 		saveOrUpdate : function() {
 			vm.user.roleIdList = $("#roleId").val();
 			console.log(vm.user);
-			if (vm.validator()) {
-				return;
-			}
+			// if (vm.validator()) {
+			// 	return;
+			// }
 
 			var url = "sys/user/save";
 			if (vm.user.userId == null) {
 				url = "sys/user/save";
+				if (vm.validator()) {
+					return;
+				}
 			} else if (vm.user.userId != null && !vm.showPassword) {
 				url = "sys/user/update";
 			} else if (vm.user.userId != null && vm.showPassword) {
