@@ -225,43 +225,53 @@ var vm = new Vue({
 			])
 		},
 		backUp(){
-			//执行备份
-			var that = this;
-			var data ={
-				"mapperId" : that.selectNode.id,
-				"sourceName" : that.logForm.sourceName,
-				"outName" : that.logForm.outName,
-				"opt": 1,
-				"startDay": that.logForm.time[0],
-        		"endDay": that.logForm.time[1]
-			}
-			$.ajax({
-	            type: 'POST',
-	            url: baseURL + 'opt/backupRestore', // 接口 URL 地址
-	            contentType: "application/json",
-	            dataType: "json",
-	            beforeSend: function(request) {
-	                request.setRequestHeader("token", token);
-	            },
-	            data: JSON.stringify(data),
-	            async: false,
-	            success: function(r) {
-	            	if(r.code == "0"){
-	            		that.$message({
-				          showClose: true,
-				          message: '操作成功！',
-				          type: 'success'
-				        });
-	            	}else{
-						that.$message({
-							showClose: true,
-							message: r.msg,
-							type: 'error'
-						});
+			this.$confirm('此操作将修改数据库数数据, 请确认是否继续?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				var that = this;
+				var data ={
+					"mapperId" : that.selectNode.id,
+					"sourceName" : that.logForm.sourceName,
+					"outName" : that.logForm.outName,
+					"opt": 1,
+					"startDay": that.logForm.time[0],
+					"endDay": that.logForm.time[1]
+				}
+				$.ajax({
+					type: 'POST',
+					url: baseURL + 'opt/backupRestore', // 接口 URL 地址
+					contentType: "application/json",
+					dataType: "json",
+					beforeSend: function(request) {
+						request.setRequestHeader("token", token);
+					},
+					data: JSON.stringify(data),
+					async: false,
+					success: function(r) {
+						if(r.code == "0"){
+							that.$message({
+								showClose: true,
+								message: '操作成功！',
+								type: 'success'
+							});
+						}else{
+							that.$message({
+								showClose: true,
+								message: r.msg,
+								type: 'error'
+							});
+						}
+						// console.log(r);
 					}
-	                // console.log(r);
-	            }
-	        });
+				});
+			}).catch(() => {
+				this.$message({
+					type: 'info',
+					message: '已取消'
+				});
+			});
 		},
 	}
 });
